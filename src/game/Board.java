@@ -1,16 +1,16 @@
 package game;
 
-public class Board {
+class Board {
     private int width, height;
     private char[][] array;
 
-    public Board(int width, int height) {
+    Board(int width, int height) {
         this.width = width;
         this.height = height;
         array = new char[width][height];
     }
 
-    public void fillBoardWithStars() {
+    void fillBoardWithStars() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 array[j][i] = '*';
@@ -18,7 +18,7 @@ public class Board {
         }
     }
 
-    public void displayBoard() {
+    void displayBoard() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 System.out.print(array[j][i]);
