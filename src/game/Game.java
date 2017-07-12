@@ -148,12 +148,39 @@ class Game {
         }
         if (!isOutOfBoard(x, y)) {
             player.removeCharacterFrom(board);
-            player = new Player(x, y);
+            if (board[x][y] == 'w') {
+                if (player.getStrength() > wolf.getStrength()) {
+                    System.out.println("Wolf has been eaten");
+                    generateWolf();
+                } else {
+                    killPlayer();
+                }
+            } else if (board[x][y] == 'h') {
+                if (player.getStrength() > hare.getStrength()) {
+                    generateHare();
+                } else {
+                    killPlayer();
+                }
+            } else if (board[x][y] == 't') {
+                if (player.getStrength() > tortoise.getStrength()) {
+                    generateTortoise();
+                } else {
+                    killPlayer();
+                }
+            } else {
+                player = new Player(x, y);
+            }
             placePlayer();
             wolfMove();
             generateGrass();
         }
         System.out.println(player.getX() + ", " + player.getY());
+    }
+
+    private void killPlayer() {
+        generatePlayer();
+        resetPlayerStrength();
+        System.out.println("Player has been eaten!");
     }
 
     public void wolfMove() {
@@ -167,8 +194,7 @@ class Game {
                 if (getPlayer().getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
-                    generatePlayer();
-                    resetPlayerStrength();
+                    killPlayer();
                 }
             } else if (board[x][y] == 'h') {
                 if (getHare().getStrength() > wolf.getStrength()) {
@@ -182,8 +208,9 @@ class Game {
                 } else {
                     generateTortoise();
                 }
+            } else {
+                wolf = new Wolf(x, y);
             }
-            wolf = new Wolf(x, y);
         }
         placeWolf();
     }
