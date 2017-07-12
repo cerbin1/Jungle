@@ -8,6 +8,10 @@ public abstract class Character {
         this.y = y;
     }
 
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
     public int getStrength() {
         return strength;
     }

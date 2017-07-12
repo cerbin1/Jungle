@@ -6,6 +6,9 @@ class Board {
     private int width, height;
     private char[][] array;
     private Player player;
+    private Wolf wolf;
+    private Tortoise tortoise;
+    private Hare hare;
     private static final Random random = new Random();
     private int freeSpaces;
 
@@ -14,8 +17,8 @@ class Board {
         this.height = height;
         array = new char[width][height];
         freeSpaces = width * height;
-        generatePlayer();
         fillBoardWithWhiteSpace();
+        generateCharacters();
         placePlayer();
         generateGrass();
     }
@@ -41,6 +44,52 @@ class Board {
         int x = random.nextInt(width);
         int y = random.nextInt(height);
         player = new Player(x, y);
+    }
+
+    private void generateCharacters() {
+        generatePlayer();
+        generateWolf();
+        generateTortoise();
+        generateHare();
+    }
+
+    private void generateWolf() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (array[x][y] == ' ') {
+                int strength = random.nextInt(3);
+                array[x][y] = 'w';
+                wolf = new Wolf(x, y, strength);
+                break;
+            }
+        }
+    }
+
+    private void generateTortoise() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (array[x][y] == ' ') {
+                int strength = random.nextInt(2);
+                array[x][y] = 't';
+                tortoise = new Tortoise(x, y, strength);
+                break;
+            }
+        }
+    }
+
+    private void generateHare() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (array[x][y] == ' ') {
+                int strength = random.nextInt(1);
+                array[x][y] = 'h';
+                hare = new Hare(x, y, strength);
+                break;
+            }
+        }
     }
 
     private void fillBoardWithWhiteSpace() {
