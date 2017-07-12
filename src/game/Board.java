@@ -138,7 +138,7 @@ class Board {
         }
         if (!isOutOfBoard(x, y)) {
             clearPlayer();
-            player = player.movePlayer(x, y);
+            player = new Player(x, y);
             placePlayer();
             generateGrass();
         }
