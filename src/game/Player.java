@@ -6,11 +6,6 @@ public class Player extends Character {
         super(x, y);
     }
 
-    @Override
-    public void move(Board board) {
-
-    }
-
     public void clear(char[][] array) {
         this.clearCharacter(array);
     }
