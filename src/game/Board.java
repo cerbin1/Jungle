@@ -1,3 +1,5 @@
+package game;
+
 public class Board {
     private int width, height;
     private char[][] array;

@@ -1,3 +1,5 @@
+package game;
+
 public abstract class Character {
     private int strength = 0;
 
