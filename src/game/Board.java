@@ -150,13 +150,46 @@ class Board {
             player.clear(array);
             player = new Player(x, y);
             placePlayer();
+            wolfMove();
             generateGrass();
         }
         System.out.println(player.getX() + ", " + player.getY());
     }
 
     public void wolfMove() {
-        wolf.move(this);
+        int[] moves = Moves.getMove();
+        int x = wolf.getX() + moves[0], y = wolf.getY() + moves[1];
+        if (!isOutOfBoard(x, y)) {
+            wolf.clear(getArray());
+            if (getArray()[x][y] == '#') {
+                wolf.incrementStrength();
+
+            } else if (getArray()[x][y] == '@') {
+                if (getPlayer().getStrength() > wolf.getStrength()) {
+                    generateWolf();
+                } else {
+                    generatePlayer();
+                }
+            } else if (getArray()[x][y] == 'h') {
+                if (getHare().getStrength() > wolf.getStrength()) {
+                    generateWolf();
+                } else {
+                    generateHare();
+                }
+            } else if (getArray()[x][y] == 't') {
+                if (getTortoise().getStrength() > wolf.getStrength()) {
+                    generateWolf();
+                } else {
+                    generateTortoise();
+                }
+            }
+            wolf = new Wolf(x, y);
+        }
+        placeWolf();
+    }
+
+    private void placeWolf() {
+        array[wolf.getX()][wolf.getY()] = 'w';
     }
 
     boolean isOutOfBoard(int x, int y) {
@@ -169,5 +202,9 @@ class Board {
 
     public Tortoise getTortoise() {
         return tortoise;
+    }
+
+    public Wolf getWolf() {
+        return wolf;
     }
 }

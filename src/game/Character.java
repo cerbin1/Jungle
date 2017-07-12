@@ -24,6 +24,14 @@ public abstract class Character {
         return y;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public void clearCharacter(char[][] array) {
         array[x][y] = ' ';
     }
@@ -31,6 +39,4 @@ public abstract class Character {
     public void incrementStrength() {
         strength++;
     }
-
-    public abstract void move(Board board);
 }
