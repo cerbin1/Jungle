@@ -72,6 +72,6 @@ class Board {
     }
 
     private boolean isOutOfBoard(int x, int y) {
-        return x < 0 || x > height || y < 0 || y > width;
+        return 0 > x || x >= width || 0 > y || y >= height;
     }
 }
