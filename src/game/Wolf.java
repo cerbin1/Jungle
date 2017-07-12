@@ -13,8 +13,4 @@ public class Wolf extends Character {
     public void incrementStrength() {
         setStrength(getStrength() + 1);
     }
-
-    public void clear(char[][] board) {
-        this.removeCharacterFrom(board);
-    }
 }

@@ -161,22 +161,21 @@ class Game {
         int x = wolf.getX() + moves[0], y = wolf.getY() + moves[1];
         if (!isOutOfBoard(x, y)) {
             wolf.removeCharacterFrom(board);
-            if (getBoard()[x][y] == '#') {
+            if (board[x][y] == '#') {
                 wolf.incrementStrength();
-
-            } else if (getBoard()[x][y] == '@') {
+            } else if (board[x][y] == '@') {
                 if (getPlayer().getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
                     generatePlayer();
                 }
-            } else if (getBoard()[x][y] == 'h') {
+            } else if (board[x][y] == 'h') {
                 if (getHare().getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
                     generateHare();
                 }
-            } else if (getBoard()[x][y] == 't') {
+            } else if (board[x][y] == 't') {
                 if (getTortoise().getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
