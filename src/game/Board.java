@@ -12,7 +12,6 @@ class Board {
         this.width = width;
         this.height = height;
         array = new char[width][height];
-        fillBoardWithStars();
         generatePlayer();
         placePlayer();
     }
@@ -21,14 +20,6 @@ class Board {
         int x = random.nextInt(width);
         int y = random.nextInt(height);
         player = new Player(x, y);
-    }
-
-    private void fillBoardWithStars() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                array[j][i] = '*';
-            }
-        }
     }
 
     private void placePlayer() {
@@ -67,7 +58,6 @@ class Board {
         if (!isOutOfBoard(x, y)) {
             player = player.movePlayer(x, y);
         }
-        fillBoardWithStars();
         placePlayer();
     }
 
