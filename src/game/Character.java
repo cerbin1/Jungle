@@ -23,4 +23,14 @@ public abstract class Character {
     public int getY() {
         return y;
     }
+
+    public void clearCharacter(char[][] array) {
+        array[x][y] = ' ';
+    }
+
+    public void incrementStrength() {
+        strength++;
+    }
+
+    public abstract void move(Board board);
 }
