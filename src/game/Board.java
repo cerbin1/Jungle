@@ -13,6 +13,7 @@ class Board {
         this.height = height;
         array = new char[width][height];
         generatePlayer();
+        fillBoardWithWhiteSpace();
         placePlayer();
     }
 
@@ -22,8 +23,20 @@ class Board {
         player = new Player(x, y);
     }
 
+    private void fillBoardWithWhiteSpace() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                array[j][i] = ' ';
+            }
+        }
+    }
+
     private void placePlayer() {
         array[player.getX()][player.getY()] = '@';
+    }
+
+    private void clearPlayer() {
+        array[player.getX()][player.getY()] = ' ';
     }
 
 
@@ -38,7 +51,6 @@ class Board {
 
     void makeMove(char direction) {
         int x = -1, y = -1;
-        System.out.println(player.getX() + ", " + player.getY());
         if (direction == 'w') {
             x = player.getX();
             y = player.getY() - 1;
@@ -56,9 +68,11 @@ class Board {
             y = player.getY();
         }
         if (!isOutOfBoard(x, y)) {
+            clearPlayer();
             player = player.movePlayer(x, y);
         }
         placePlayer();
+        System.out.println(player.getX() + ", " + player.getY());
     }
 
     private boolean isOutOfBoard(int x, int y) {
