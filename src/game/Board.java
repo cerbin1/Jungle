@@ -46,29 +46,26 @@ class Board {
     }
 
     void makeMove(char direction) {
+        int x = -1, y = -1;
+        System.out.println(player.getX() + ", " + player.getY());
         if (direction == 'w') {
-            int x = player.getX(), y = player.getY() - 1;
-            if (!isOutOfBoard(x, y)) {
-                player = player.movePlayer(x, y);
-            }
+            x = player.getX();
+            y = player.getY() - 1;
         }
         if (direction == 's') {
-            int x = player.getX(), y = player.getY() + 1;
-            if (!isOutOfBoard(x, y)) {
-                player = player.movePlayer(x, y);
-            }
+            x = player.getX();
+            y = player.getY() + 1;
         }
         if (direction == 'a') {
-            int x = player.getX() - 1, y = player.getY();
-            if (!isOutOfBoard(x, y)) {
-                player = player.movePlayer(x, y);
-            }
+            x = player.getX() - 1;
+            y = player.getY();
         }
         if (direction == 'd') {
-            int x = player.getX() + 1, y = player.getY();
-            if (!isOutOfBoard(x, y)) {
-                player = player.movePlayer(x, y);
-            }
+            x = player.getX() + 1;
+            y = player.getY();
+        }
+        if (!isOutOfBoard(x, y)) {
+            player = player.movePlayer(x, y);
         }
         fillBoardWithStars();
         placePlayer();
