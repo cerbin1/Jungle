@@ -19,7 +19,8 @@ public class Application {
                     break;
                 }
                 if (isProperlyMove(userInput)) {
-                    // input processing
+                    board.makeMove(userInput);
+                    board.displayBoard();
                 } else {
                     System.out.println("Wrong move!");
                 }
