@@ -147,7 +147,7 @@ class Game {
             y = player.getY();
         }
         if (!isOutOfBoard(x, y)) {
-            player.clear(board);
+            player.removeCharacterFrom(board);
             player = new Player(x, y);
             placePlayer();
             wolfMove();
@@ -160,7 +160,7 @@ class Game {
         int[] moves = Moves.getMove();
         int x = wolf.getX() + moves[0], y = wolf.getY() + moves[1];
         if (!isOutOfBoard(x, y)) {
-            wolf.clear(getBoard());
+            wolf.removeCharacterFrom(board);
             if (getBoard()[x][y] == '#') {
                 wolf.incrementStrength();
 

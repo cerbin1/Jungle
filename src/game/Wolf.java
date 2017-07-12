@@ -14,7 +14,7 @@ public class Wolf extends Character {
         setStrength(getStrength() + 1);
     }
 
-    public void clear(char[][] array) {
-        this.removeCharacterFrom(array);
+    public void clear(char[][] board) {
+        this.removeCharacterFrom(board);
     }
 }
