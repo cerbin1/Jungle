@@ -7,6 +7,6 @@ public class Player extends Character {
     }
 
     public void clear(char[][] array) {
-        this.clearCharacter(array);
+        this.removeCharacterFrom(array);
     }
 }

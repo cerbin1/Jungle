@@ -32,7 +32,7 @@ public abstract class Character {
         this.y = y;
     }
 
-    public void clearCharacter(char[][] array) {
+    public void removeCharacterFrom(char[][] array) {
         array[x][y] = ' ';
     }
 

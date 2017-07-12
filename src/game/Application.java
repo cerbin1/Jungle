@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Board board = new Board(4, 8);
-        board.displayBoard();
+        Game game = new Game(4, 8);
+        game.displayBoard();
         while (true) {
             System.out.println("wasd to move, q to exit");
             Scanner scanner = new Scanner(System.in);
@@ -19,8 +19,8 @@ public class Application {
                     break;
                 }
                 if (isProperlyMove(userInput)) {
-                    board.makeMove(userInput);
-                    board.displayBoard();
+                    game.makeMove(userInput);
+                    game.displayBoard();
                 } else {
                     System.out.println("Wrong move!");
                 }

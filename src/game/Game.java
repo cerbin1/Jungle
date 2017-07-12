@@ -2,7 +2,7 @@ package game;
 
 import java.util.Random;
 
-class Board {
+class Game {
     private int width, height;
 
     public char[][] getArray() {
@@ -22,7 +22,7 @@ class Board {
     private static final Random random = new Random();
     private int freeSpaces;
 
-    Board(int width, int height) {
+    Game(int width, int height) {
         this.width = width;
         this.height = height;
         array = new char[width][height];

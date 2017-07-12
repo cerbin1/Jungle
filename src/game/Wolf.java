@@ -15,6 +15,6 @@ public class Wolf extends Character {
     }
 
     public void clear(char[][] array) {
-        this.clearCharacter(array);
+        this.removeCharacterFrom(array);
     }
 }
