@@ -4,7 +4,17 @@ import java.util.Random;
 
 class Board {
     private int width, height;
+
+    public char[][] getArray() {
+        return array;
+    }
+
     private char[][] array;
+
+    public Player getPlayer() {
+        return player;
+    }
+
     private Player player;
     private Wolf wolf;
     private Tortoise tortoise;
@@ -40,10 +50,15 @@ class Board {
         return freeSpaces > 0;
     }
 
-    private void generatePlayer() {
-        int x = random.nextInt(width);
-        int y = random.nextInt(height);
-        player = new Player(x, y);
+    void generatePlayer() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (array[x][y] == ' ') {
+                player = new Player(x, y);
+                break;
+            }
+        }
     }
 
     private void generateCharacters() {
@@ -53,7 +68,7 @@ class Board {
         generateHare();
     }
 
-    private void generateWolf() {
+    void generateWolf() {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
@@ -66,7 +81,7 @@ class Board {
         }
     }
 
-    private void generateTortoise() {
+    void generateTortoise() {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
@@ -79,7 +94,7 @@ class Board {
         }
     }
 
-    private void generateHare() {
+    void generateHare() {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
@@ -103,11 +118,6 @@ class Board {
     private void placePlayer() {
         array[player.getX()][player.getY()] = '@';
     }
-
-    private void clearPlayer() {
-        array[player.getX()][player.getY()] = ' ';
-    }
-
 
     void displayBoard() {
         for (int i = 0; i < height; i++) {
@@ -137,7 +147,7 @@ class Board {
             y = player.getY();
         }
         if (!isOutOfBoard(x, y)) {
-            clearPlayer();
+            player.clear(array);
             player = new Player(x, y);
             placePlayer();
             generateGrass();
@@ -145,7 +155,19 @@ class Board {
         System.out.println(player.getX() + ", " + player.getY());
     }
 
-    private boolean isOutOfBoard(int x, int y) {
+    public void wolfMove() {
+        wolf.move(this);
+    }
+
+    boolean isOutOfBoard(int x, int y) {
         return 0 > x || x >= width || 0 > y || y >= height;
+    }
+
+    public Hare getHare() {
+        return hare;
+    }
+
+    public Tortoise getTortoise() {
+        return tortoise;
     }
 }
