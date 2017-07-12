@@ -5,11 +5,11 @@ import java.util.Random;
 class Game {
     private int width, height;
 
-    public char[][] getArray() {
-        return array;
+    public char[][] getBoard() {
+        return board;
     }
 
-    private char[][] array;
+    private char[][] board;
 
     public Player getPlayer() {
         return player;
@@ -25,7 +25,7 @@ class Game {
     Game(int width, int height) {
         this.width = width;
         this.height = height;
-        array = new char[width][height];
+        board = new char[width][height];
         freeSpaces = width * height;
         fillBoardWithWhiteSpace();
         generateCharacters();
@@ -38,8 +38,8 @@ class Game {
             while (true) {
                 int x = random.nextInt(width);
                 int y = random.nextInt(height);
-                if (array[x][y] == ' ') {
-                    array[x][y] = '#';
+                if (board[x][y] == ' ') {
+                    board[x][y] = '#';
                     break;
                 }
             }
@@ -54,7 +54,7 @@ class Game {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
-            if (array[x][y] == ' ') {
+            if (board[x][y] == ' ') {
                 player = new Player(x, y);
                 break;
             }
@@ -72,9 +72,9 @@ class Game {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
-            if (array[x][y] == ' ') {
+            if (board[x][y] == ' ') {
                 int strength = random.nextInt(3);
-                array[x][y] = 'w';
+                board[x][y] = 'w';
                 wolf = new Wolf(x, y, strength);
                 break;
             }
@@ -85,9 +85,9 @@ class Game {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
-            if (array[x][y] == ' ') {
+            if (board[x][y] == ' ') {
                 int strength = random.nextInt(2);
-                array[x][y] = 't';
+                board[x][y] = 't';
                 tortoise = new Tortoise(x, y, strength);
                 break;
             }
@@ -98,9 +98,9 @@ class Game {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
-            if (array[x][y] == ' ') {
+            if (board[x][y] == ' ') {
                 int strength = random.nextInt(1);
-                array[x][y] = 'h';
+                board[x][y] = 'h';
                 hare = new Hare(x, y, strength);
                 break;
             }
@@ -110,19 +110,19 @@ class Game {
     private void fillBoardWithWhiteSpace() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                array[j][i] = ' ';
+                board[j][i] = ' ';
             }
         }
     }
 
     private void placePlayer() {
-        array[player.getX()][player.getY()] = '@';
+        board[player.getX()][player.getY()] = '@';
     }
 
     void displayBoard() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                System.out.print(array[j][i]);
+                System.out.print(board[j][i]);
             }
             System.out.println();
         }
@@ -147,7 +147,7 @@ class Game {
             y = player.getY();
         }
         if (!isOutOfBoard(x, y)) {
-            player.clear(array);
+            player.clear(board);
             player = new Player(x, y);
             placePlayer();
             wolfMove();
@@ -160,23 +160,23 @@ class Game {
         int[] moves = Moves.getMove();
         int x = wolf.getX() + moves[0], y = wolf.getY() + moves[1];
         if (!isOutOfBoard(x, y)) {
-            wolf.clear(getArray());
-            if (getArray()[x][y] == '#') {
+            wolf.clear(getBoard());
+            if (getBoard()[x][y] == '#') {
                 wolf.incrementStrength();
 
-            } else if (getArray()[x][y] == '@') {
+            } else if (getBoard()[x][y] == '@') {
                 if (getPlayer().getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
                     generatePlayer();
                 }
-            } else if (getArray()[x][y] == 'h') {
+            } else if (getBoard()[x][y] == 'h') {
                 if (getHare().getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
                     generateHare();
                 }
-            } else if (getArray()[x][y] == 't') {
+            } else if (getBoard()[x][y] == 't') {
                 if (getTortoise().getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
@@ -189,7 +189,7 @@ class Game {
     }
 
     private void placeWolf() {
-        array[wolf.getX()][wolf.getY()] = 'w';
+        board[wolf.getX()][wolf.getY()] = 'w';
     }
 
     boolean isOutOfBoard(int x, int y) {
