@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Board board = new Board(10, 20);
+        Board board = new Board(4, 8);
         board.displayBoard();
         while (true) {
             System.out.println("wasd to move, q to exit");
