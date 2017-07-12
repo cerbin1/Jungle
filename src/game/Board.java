@@ -5,7 +5,7 @@ import java.util.Random;
 class Board {
     private int width, height;
     private char[][] array;
-    Player player;
+    private Player player;
     private static final Random random = new Random();
 
     Board(int width, int height) {
@@ -30,6 +30,7 @@ class Board {
             }
         }
     }
+
     private void placePlayer() {
         array[player.getX()][player.getY()] = '@';
     }
@@ -42,5 +43,38 @@ class Board {
             }
             System.out.println();
         }
+    }
+
+    public void makeMove(char direction) {
+        if (direction == 'w') {
+            int x = player.getX(), y = player.getY() - 1;
+            if (!isOutOfBoard(x, y)) {
+                player = player.movePlayer(x, y);
+            }
+        }
+        if (direction == 's') {
+            int x = player.getX(), y = player.getY() + 1;
+            if (!isOutOfBoard(x, y)) {
+                player = player.movePlayer(x, y);
+            }
+        }
+        if (direction == 'a') {
+            int x = player.getX() - 1, y = player.getY();
+            if (!isOutOfBoard(x, y)) {
+                player = player.movePlayer(x, y);
+            }
+        }
+        if (direction == 'd') {
+            int x = player.getX() + 1, y = player.getY();
+            if (!isOutOfBoard(x, y)) {
+                player = player.movePlayer(x, y);
+            }
+        }
+        fillBoardWithStars();
+        placePlayer();
+    }
+
+    private boolean isOutOfBoard(int x, int y) {
+        return x < 0 || x > height || y < 0 || y > width;
     }
 }
