@@ -31,6 +31,7 @@ class Game {
         generateCharacters();
         placePlayer();
         generateGrass();
+        generateApple();
     }
 
     private void generateGrass() {
@@ -40,6 +41,19 @@ class Game {
                 int y = random.nextInt(height);
                 if (board[x][y] == ' ') {
                     board[x][y] = '#';
+                    break;
+                }
+            }
+        }
+    }
+
+    private void generateApple() {
+        if (isEmptySpace()) {
+            while (true) {
+                int x = random.nextInt(width);
+                int y = random.nextInt(height);
+                if (board[x][y] == ' ') {
+                    board[x][y] = 'a';
                     break;
                 }
             }
@@ -167,14 +181,18 @@ class Game {
                 } else {
                     killPlayer();
                 }
+            } else if (board[x][y] == 'a') {
+                player.incrementStrength();
+                player = new Player(x, y);
             } else {
                 player = new Player(x, y);
             }
             placePlayer();
             wolfMove();
             generateGrass();
+            generateApple();
         }
-        System.out.println(player.getX() + ", " + player.getY());
+        System.out.println(player.getX() + ", " + player.getY() + ", " + player.getStrength());
     }
 
     private void killPlayer() {
