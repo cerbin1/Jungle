@@ -168,6 +168,7 @@ class Game {
                     generateWolf();
                 } else {
                     generatePlayer();
+                    resetPlayerStrength();
                 }
             } else if (board[x][y] == 'h') {
                 if (getHare().getStrength() > wolf.getStrength()) {
@@ -185,6 +186,10 @@ class Game {
             wolf = new Wolf(x, y);
         }
         placeWolf();
+    }
+
+    private void resetPlayerStrength() {
+        player.setStrength(0);
     }
 
     private void placeWolf() {
