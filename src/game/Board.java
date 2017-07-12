@@ -7,14 +7,34 @@ class Board {
     private char[][] array;
     private Player player;
     private static final Random random = new Random();
+    private int freeSpaces;
 
     Board(int width, int height) {
         this.width = width;
         this.height = height;
         array = new char[width][height];
+        freeSpaces = width * height;
         generatePlayer();
         fillBoardWithWhiteSpace();
         placePlayer();
+        generateGrass();
+    }
+
+    private void generateGrass() {
+        if (isEmptySpace()) {
+            while (true) {
+                int x = random.nextInt(width);
+                int y = random.nextInt(height);
+                if (array[x][y] == ' ') {
+                    array[x][y] = '#';
+                    break;
+                }
+            }
+        }
+    }
+
+    private boolean isEmptySpace() {
+        return freeSpaces > 0;
     }
 
     private void generatePlayer() {
@@ -70,8 +90,9 @@ class Board {
         if (!isOutOfBoard(x, y)) {
             clearPlayer();
             player = player.movePlayer(x, y);
+            placePlayer();
+            generateGrass();
         }
-        placePlayer();
         System.out.println(player.getX() + ", " + player.getY());
     }
 
