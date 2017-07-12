@@ -23,7 +23,7 @@ class Board {
         player = new Player(x, y);
     }
 
-    void fillBoardWithStars() {
+    private void fillBoardWithStars() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 array[j][i] = '*';
@@ -45,7 +45,7 @@ class Board {
         }
     }
 
-    public void makeMove(char direction) {
+    void makeMove(char direction) {
         if (direction == 'w') {
             int x = player.getX(), y = player.getY() - 1;
             if (!isOutOfBoard(x, y)) {
