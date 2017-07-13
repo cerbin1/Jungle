@@ -29,7 +29,9 @@ public abstract class Character {
     }
 
     public void setCoOrdinates(int x, int y) {
-        this.x = x;
-        this.y = y;
+        if (x >= 0 && y >= 0) {
+            this.x = x;
+            this.y = y;
+        }
     }
 }
