@@ -194,9 +194,9 @@ class Game {
         System.out.println(player.getX() + ", " + player.getY() + ", " + player.getStrength());
     }
 
-    private void killPlayer() {
+    void killPlayer() {
         generatePlayer();
-        resetPlayerStrength();
+        player.resetStrength();
         System.out.println("Player has been eaten!");
     }
 
@@ -230,10 +230,6 @@ class Game {
             boar.setCoOrdinates(x, y);
             placeBoar();
         }
-    }
-
-    private void resetPlayerStrength() {
-        player.setStrength(0);
     }
 
     private void placeBoar() {
