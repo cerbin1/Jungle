@@ -1,11 +1,7 @@
 package game;
 
-import java.util.Random;
-
 class Game {
-    private int width, height;
-
-    private char[][] board;
+    private Board board;
 
     public Player getPlayer() {
         return player;
@@ -15,127 +11,23 @@ class Game {
     private Boar boar;
     private Tortoise tortoise;
     private Hare hare;
-    private static final Random random = new Random();
-    private int freeSpaces;
 
     Game(int width, int height) {
-        this.width = width;
-        this.height = height;
-        board = new char[width][height];
-        freeSpaces = width * height;
-        fillBoardWithWhiteSpace();
+        board = new Board(width, height);
         generateCharacters();
-        placePlayer();
-        generateGrass();
-        generateApple();
-    }
-
-    private void generateGrass() {
-        if (isEmptySpace()) {
-            while (true) {
-                int x = random.nextInt(width);
-                int y = random.nextInt(height);
-                if (board[x][y] == ' ') {
-                    board[x][y] = '#';
-                    break;
-                }
-            }
-        }
-    }
-
-    private void generateApple() {
-        if (isEmptySpace()) {
-            while (true) {
-                int x = random.nextInt(width);
-                int y = random.nextInt(height);
-                if (board[x][y] == ' ') {
-                    board[x][y] = 'a';
-                    break;
-                }
-            }
-        }
-    }
-
-    private boolean isEmptySpace() {
-        return freeSpaces > 0;
-    }
-
-    void generatePlayer() {
-        while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (board[x][y] == ' ') {
-                player = new Player(x, y);
-                break;
-            }
-        }
+        board.generate('a');
+        board.generate('#');
     }
 
     private void generateCharacters() {
-        generatePlayer();
-        generateBoar();
-        generateTortoise();
-        generateHare();
-    }
-
-    void generateBoar() {
-        while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (board[x][y] == ' ') {
-                int strength = random.nextInt(3);
-                board[x][y] = 'w';
-                boar = new Boar(x, y, strength);
-                break;
-            }
-        }
-    }
-
-    void generateTortoise() {
-        while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (board[x][y] == ' ') {
-                int strength = random.nextInt(2);
-                board[x][y] = 't';
-                tortoise = new Tortoise(x, y, strength);
-                break;
-            }
-        }
-    }
-
-    void generateHare() {
-        while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (board[x][y] == ' ') {
-                int strength = random.nextInt(1);
-                board[x][y] = 'h';
-                hare = new Hare(x, y, strength);
-                break;
-            }
-        }
-    }
-
-    private void fillBoardWithWhiteSpace() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                board[j][i] = ' ';
-            }
-        }
-    }
-
-    private void placePlayer() {
-        board[player.getX()][player.getY()] = '@';
+        player = board.generatePlayer();
+        boar = board.generateBoar();
+        tortoise = board.generateTortoise();
+        hare = board.generateHare();
     }
 
     void displayBoard() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                System.out.print(board[j][i]);
-            }
-            System.out.println();
-        }
+        board.displayBoard();
     }
 
     void makeMove(char direction) {
@@ -156,42 +48,42 @@ class Game {
             x = player.getX() + 1;
             y = player.getY();
         }
-        if (!isOutOfBoard(x, y)) {
-            player.removeCharacterFrom(board);
-            if (board[x][y] == 'w') {
+        if (board.isInsideBoard(x, y)) {
+            player.removeCharacterFrom(board.getBoard()); // Set remove in Board
+            if (board.isWolf(x, y)) {
                 if (player.getStrength() > boar.getStrength()) {
                     System.out.println("Boar has been eaten");
-                    generateBoar();
+                    boar = board.generateBoar();
                 } else {
                     killPlayer();
                 }
-            } else if (board[x][y] == 'h') {
+            } else if (board.isHare(x, y)) {
                 if (player.getStrength() > hare.getStrength()) {
-                    generateHare();
+                    hare = board.generateHare();
                 } else {
                     killPlayer();
                 }
-            } else if (board[x][y] == 't') {
+            } else if (board.isTortoise(x, y)) {
                 if (player.getStrength() > tortoise.getStrength()) {
-                    generateTortoise();
+                    tortoise = board.generateTortoise();
                 } else {
                     killPlayer();
                 }
-            } else if (board[x][y] == 'a') {
+            } else if (board.isApple(x, y)) {
                 player.incrementStrength();
                 player.setCoOrdinates(x, y);
             }
+            board.placePlayer(x, y);
             player.setCoOrdinates(x, y);
-            placePlayer();
             boarMove();
-            generateGrass();
-            generateApple();
+            board.generate('a');
+            board.generate('#');
         }
         System.out.println(player.getX() + ", " + player.getY() + ", " + player.getStrength());
     }
 
     void killPlayer() {
-        generatePlayer();
+        player = board.generatePlayer();
         player.resetStrength();
         System.out.println("Player has been eaten!");
     }
@@ -199,40 +91,32 @@ class Game {
     public void boarMove() {
         int[] moves = Moves.getMove();
         int x = boar.getX() + moves[0], y = boar.getY() + moves[1];
-        if (!isOutOfBoard(x, y)) {
-            boar.removeCharacterFrom(board);
-            if (board[x][y] == '#') {
+        if (board.isInsideBoard(x, y)) {
+            boar.removeCharacterFrom(board.getBoard()); // Set remove in Board
+            if (board.isGrass(x, y)) {
                 boar.incrementStrength();
                 boar.setCoOrdinates(x, y);
-            } else if (board[x][y] == '@') {
+            } else if (board.isPlayer(x, y)) {
                 if (getPlayer().getStrength() > boar.getStrength()) {
-                    generateBoar();
+                    boar = board.generateBoar();
                 } else {
                     killPlayer();
                 }
-            } else if (board[x][y] == 'h') {
+            } else if (board.isHare(x, y)) {
                 if (hare.getStrength() > boar.getStrength()) {
-                    generateBoar();
+                    boar = board.generateBoar();
                 } else {
-                    generateHare();
+                    hare = board.generateHare();
                 }
-            } else if (board[x][y] == 't') {
+            } else if (board.isTortoise(x, y)) {
                 if (tortoise.getStrength() > boar.getStrength()) {
-                    generateBoar();
+                    boar = board.generateBoar();
                 } else {
-                    generateTortoise();
+                    tortoise = board.generateTortoise();
                 }
             }
             boar.setCoOrdinates(x, y);
-            placeBoar();
+            board.placeBoar(x, y);
         }
-    }
-
-    private void placeBoar() {
-        board[boar.getX()][boar.getY()] = 'w';
-    }
-
-    boolean isOutOfBoard(int x, int y) {
-        return 0 > x || x >= width || 0 > y || y >= height;
     }
 }

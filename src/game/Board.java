@@ -1,11 +1,15 @@
 package game;
 
+import java.util.Random;
+
 import static java.util.Arrays.stream;
 
 public class Board {
     private int width;
     private int height;
     private final char[][] board;
+
+    private final static Random random = new Random();
 
     public Board(int width, int height) {
         this.width = width;
@@ -26,6 +30,14 @@ public class Board {
         return 0 <= x && x < width && 0 <= y && y < height;
     }
 
+    public void displayBoard() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                System.out.print(board[j][i]);
+            }
+            System.out.println();
+        }
+    }
 
     public int countFreeSpaces() {
         return (int) stream(board)
@@ -37,5 +49,113 @@ public class Board {
 
     public boolean isEmptySpace(int x, int y) {
         return board[x][y] == ' ';
+    }
+
+    public void generate(char character) {
+        if (countFreeSpaces() != 0) {
+            while (true) {
+                int x = random.nextInt(width);
+                int y = random.nextInt(height);
+                if (isEmptySpace(x, y)) {
+                    board[x][y] = character;
+                    break;
+                }
+            }
+        }
+    }
+
+    public void placePlayer(int x, int y) {
+        board[x][y] = '@';
+    }
+
+    public void placeBoar(int x, int y) {
+        board[x][y] = 'b';
+    }
+
+    public void placeTortoise(int x, int y) {
+        board[x][y] = 't';
+    }
+
+    public void placeHare(int x, int y) {
+        board[x][y] = 'h';
+    }
+
+    public Player generatePlayer() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (board[x][y] == ' ') {
+                board[x][y] = '@';
+                return new Player(x, y);
+            }
+        }
+    }
+
+    public Boar generateBoar() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (board[x][y] == ' ') {
+                int strength = random.nextInt(3);
+                board[x][y] = 'b';
+                return new Boar(x, y, strength);
+            }
+        }
+    }
+
+    public Tortoise generateTortoise() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (board[x][y] == ' ') {
+                int strength = random.nextInt(2);
+                board[x][y] = 't';
+                return new Tortoise(x, y, strength);
+            }
+        }
+    }
+
+    public Hare generateHare() {
+        while (true) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            if (board[x][y] == ' ') {
+                int strength = random.nextInt(1);
+                board[x][y] = 'h';
+                return new Hare(x, y, strength);
+            }
+        }
+    }
+
+    public boolean isPlayer(int x, int y) {
+        return  board[x][y] == '@';
+    }
+
+    public char[][] getBoard() {
+        return board;
+    }
+
+    public boolean isWolf(int x, int y) {
+        return board[x][y] == 'w'; // TODO it is higher level of abstraction, there should be method is a Character, and in Game there should be method isWolf that would pass as parameter 'w'
+    }
+
+    public boolean isBoar(int x, int y) {
+       return  board[x][y] == 'b';
+    }
+
+    public boolean isTortoise(int x, int y) {
+       return  board[x][y] == 't';
+    }
+
+    public boolean isHare(int x, int y) {
+       return  board[x][y] == 'h';
+    }
+
+    public boolean isGrass(int x, int y) {
+       return  board[x][y] == '#';
+    }
+
+    public boolean isApple(int x, int y) {
+       return  board[x][y] == 'a';
     }
 }

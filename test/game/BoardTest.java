@@ -115,4 +115,16 @@ public class BoardTest {
         Assert.assertTrue(isEmpty);
     }
 
+    @Test
+    public void shouldPlaceCharacterOnBoard() {
+        // given
+        Board board = getBoard();
+
+        // when
+        board.placePlayer(0, 0);
+
+        // then
+        Assert.assertEquals(99, board.countFreeSpaces());
+        Assert.assertFalse(board.isEmptySpace(0, 0));
+    }
 }
