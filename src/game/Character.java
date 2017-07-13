@@ -39,4 +39,9 @@ public abstract class Character {
     public void incrementStrength() {
         strength++;
     }
+
+    public void setCoOrdinates(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }

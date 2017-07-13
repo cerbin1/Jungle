@@ -183,9 +183,9 @@ class Game {
                 }
             } else if (board[x][y] == 'a') {
                 player.incrementStrength();
-                player = new Player(x, y);
+                player.setCoOrdinates(x, y);
             } else {
-                player = new Player(x, y);
+                player.setCoOrdinates(x, y);
             }
             placePlayer();
             wolfMove();
@@ -215,19 +215,19 @@ class Game {
                     killPlayer();
                 }
             } else if (board[x][y] == 'h') {
-                if (getHare().getStrength() > wolf.getStrength()) {
+                if (hare.getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
                     generateHare();
                 }
             } else if (board[x][y] == 't') {
-                if (getTortoise().getStrength() > wolf.getStrength()) {
+                if (tortoise.getStrength() > wolf.getStrength()) {
                     generateWolf();
                 } else {
                     generateTortoise();
                 }
             } else {
-                wolf = new Wolf(x, y);
+                wolf.setCoOrdinates(x, y);
             }
         }
         placeWolf();
@@ -243,17 +243,5 @@ class Game {
 
     boolean isOutOfBoard(int x, int y) {
         return 0 > x || x >= width || 0 > y || y >= height;
-    }
-
-    public Hare getHare() {
-        return hare;
-    }
-
-    public Tortoise getTortoise() {
-        return tortoise;
-    }
-
-    public Wolf getWolf() {
-        return wolf;
     }
 }
