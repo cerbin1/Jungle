@@ -22,8 +22,6 @@ class Game {
     private void generateCharacters() {
         player = board.generatePlayer();
         boar = board.generateBoar();
-        tortoise = board.generateTortoise();
-        hare = board.generateHare();
     }
 
     void displayBoard() {
@@ -50,22 +48,10 @@ class Game {
         }
         if (board.isInsideBoard(x, y)) {
             board.removeCharacter(x, y);
-            if (board.isWolf(x, y)) {
+            if (board.isBoar(x, y)) {
                 if (player.getStrength() > boar.getStrength()) {
                     System.out.println("Boar has been eaten");
                     boar = board.generateBoar();
-                } else {
-                    killPlayer();
-                }
-            } else if (board.isHare(x, y)) {
-                if (player.getStrength() > hare.getStrength()) {
-                    hare = board.generateHare();
-                } else {
-                    killPlayer();
-                }
-            } else if (board.isTortoise(x, y)) {
-                if (player.getStrength() > tortoise.getStrength()) {
-                    tortoise = board.generateTortoise();
                 } else {
                     killPlayer();
                 }
@@ -101,18 +87,6 @@ class Game {
                     boar = board.generateBoar();
                 } else {
                     killPlayer();
-                }
-            } else if (board.isHare(x, y)) {
-                if (hare.getStrength() > boar.getStrength()) {
-                    boar = board.generateBoar();
-                } else {
-                    hare = board.generateHare();
-                }
-            } else if (board.isTortoise(x, y)) {
-                if (tortoise.getStrength() > boar.getStrength()) {
-                    boar = board.generateBoar();
-                } else {
-                    tortoise = board.generateTortoise();
                 }
             }
             boar.setCoOrdinates(x, y);
