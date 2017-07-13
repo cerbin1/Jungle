@@ -16,7 +16,7 @@ class Game {
     }
 
     private Player player;
-    private Wolf wolf;
+    private Boar boar;
     private Tortoise tortoise;
     private Hare hare;
     private static final Random random = new Random();
@@ -77,19 +77,19 @@ class Game {
 
     private void generateCharacters() {
         generatePlayer();
-        generateWolf();
+        generateBoar();
         generateTortoise();
         generateHare();
     }
 
-    void generateWolf() {
+    void generateBoar() {
         while (true) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
             if (board[x][y] == ' ') {
                 int strength = random.nextInt(3);
                 board[x][y] = 'w';
-                wolf = new Wolf(x, y, strength);
+                boar = new Boar(x, y, strength);
                 break;
             }
         }
@@ -163,9 +163,9 @@ class Game {
         if (!isOutOfBoard(x, y)) {
             player.removeCharacterFrom(board);
             if (board[x][y] == 'w') {
-                if (player.getStrength() > wolf.getStrength()) {
-                    System.out.println("Wolf has been eaten");
-                    generateWolf();
+                if (player.getStrength() > boar.getStrength()) {
+                    System.out.println("Boar has been eaten");
+                    generateBoar();
                 } else {
                     killPlayer();
                 }
@@ -187,7 +187,7 @@ class Game {
             }
             player.setCoOrdinates(x, y);
             placePlayer();
-            wolfMove();
+            boarMove();
             generateGrass();
             generateApple();
         }
@@ -200,35 +200,35 @@ class Game {
         System.out.println("Player has been eaten!");
     }
 
-    public void wolfMove() {
+    public void boarMove() {
         int[] moves = Moves.getMove();
-        int x = wolf.getX() + moves[0], y = wolf.getY() + moves[1];
+        int x = boar.getX() + moves[0], y = boar.getY() + moves[1];
         if (!isOutOfBoard(x, y)) {
-            wolf.removeCharacterFrom(board);
+            boar.removeCharacterFrom(board);
             if (board[x][y] == '#') {
-                wolf.incrementStrength();
-                wolf.setCoOrdinates(x, y);
+                boar.incrementStrength();
+                boar.setCoOrdinates(x, y);
             } else if (board[x][y] == '@') {
-                if (getPlayer().getStrength() > wolf.getStrength()) {
-                    generateWolf();
+                if (getPlayer().getStrength() > boar.getStrength()) {
+                    generateBoar();
                 } else {
                     killPlayer();
                 }
             } else if (board[x][y] == 'h') {
-                if (hare.getStrength() > wolf.getStrength()) {
-                    generateWolf();
+                if (hare.getStrength() > boar.getStrength()) {
+                    generateBoar();
                 } else {
                     generateHare();
                 }
             } else if (board[x][y] == 't') {
-                if (tortoise.getStrength() > wolf.getStrength()) {
-                    generateWolf();
+                if (tortoise.getStrength() > boar.getStrength()) {
+                    generateBoar();
                 } else {
                     generateTortoise();
                 }
             }
-            wolf.setCoOrdinates(x, y);
-            placeWolf();
+            boar.setCoOrdinates(x, y);
+            placeBoar();
         }
     }
 
@@ -236,8 +236,8 @@ class Game {
         player.setStrength(0);
     }
 
-    private void placeWolf() {
-        board[wolf.getX()][wolf.getY()] = 'w';
+    private void placeBoar() {
+        board[boar.getX()][boar.getY()] = 'w';
     }
 
     boolean isOutOfBoard(int x, int y) {
