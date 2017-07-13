@@ -1,7 +1,8 @@
 package game;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class BoardTest {
     private static Board getBoard() {
@@ -17,7 +18,7 @@ public class BoardTest {
         boolean isOnBoard = board.isInsideBoard(5, 5);
 
         // then
-        Assert.assertTrue(isOnBoard);
+        assertTrue(isOnBoard);
     }
 
     @Test
@@ -29,7 +30,7 @@ public class BoardTest {
         boolean isOnBoard = board.isInsideBoard(10, 5);
 
         // then
-        Assert.assertFalse(isOnBoard);
+        assertFalse(isOnBoard);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class BoardTest {
         boolean isOnBoard = board.isInsideBoard(15, 5);
 
         // then
-        Assert.assertFalse(isOnBoard);
+        assertFalse(isOnBoard);
     }
 
     @Test
@@ -53,7 +54,7 @@ public class BoardTest {
         boolean isOnBoard = board.isInsideBoard(-5, 5);
 
         // then
-        Assert.assertFalse(isOnBoard);
+        assertFalse(isOnBoard);
     }
 
     @Test
@@ -65,7 +66,7 @@ public class BoardTest {
         boolean isOnBoard = board.isInsideBoard(5, 10);
 
         // then
-        Assert.assertFalse(isOnBoard);
+        assertFalse(isOnBoard);
     }
 
     @Test
@@ -77,7 +78,7 @@ public class BoardTest {
         boolean isOnBoard = board.isInsideBoard(5, 15);
 
         // then
-        Assert.assertFalse(isOnBoard);
+        assertFalse(isOnBoard);
     }
 
     @Test
@@ -89,7 +90,7 @@ public class BoardTest {
         boolean isOnBoard = board.isInsideBoard(5, -5);
 
         // then
-        Assert.assertFalse(isOnBoard);
+        assertFalse(isOnBoard);
     }
 
     @Test
@@ -100,7 +101,7 @@ public class BoardTest {
         // when
         int freeSpaces = board.countFreeSpaces();
         // then
-        Assert.assertEquals(100, freeSpaces);
+        assertEquals(100, freeSpaces);
     }
 
     @Test
@@ -112,7 +113,7 @@ public class BoardTest {
         boolean isEmpty = board.isEmptySpace(0, 0);
 
         // then
-        Assert.assertTrue(isEmpty);
+        assertTrue(isEmpty);
     }
 
     @Test
@@ -124,7 +125,7 @@ public class BoardTest {
         board.placePlayer(0, 0);
 
         // then
-        Assert.assertEquals(99, board.countFreeSpaces());
-        Assert.assertFalse(board.isEmptySpace(0, 0));
+        assertEquals(99, board.countFreeSpaces());
+        assertFalse(board.isEmptySpace(0, 0));
     }
 }
