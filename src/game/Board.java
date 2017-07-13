@@ -20,7 +20,7 @@ public class Board {
         }
     }
 
-    public boolean isOnBoard(int x, int y) {
+    public boolean isInsideBoard(int x, int y) {
         return 0 <= x && x < width && 0 <= y && y < height;
     }
 

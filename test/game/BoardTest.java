@@ -14,7 +14,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.isOnBoard(5, 5);
+        boolean isOnBoard = board.isInsideBoard(5, 5);
 
         // then
         Assert.assertTrue(isOnBoard);
@@ -26,7 +26,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.isOnBoard(10, 5);
+        boolean isOnBoard = board.isInsideBoard(10, 5);
 
         // then
         Assert.assertFalse(isOnBoard);
@@ -38,7 +38,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.isOnBoard(15, 5);
+        boolean isOnBoard = board.isInsideBoard(15, 5);
 
         // then
         Assert.assertFalse(isOnBoard);
@@ -50,7 +50,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.isOnBoard(-5, 5);
+        boolean isOnBoard = board.isInsideBoard(-5, 5);
 
         // then
         Assert.assertFalse(isOnBoard);
@@ -62,7 +62,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.isOnBoard(5, 10);
+        boolean isOnBoard = board.isInsideBoard(5, 10);
 
         // then
         Assert.assertFalse(isOnBoard);
@@ -74,7 +74,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.isOnBoard(5, 15);
+        boolean isOnBoard = board.isInsideBoard(5, 15);
 
         // then
         Assert.assertFalse(isOnBoard);
@@ -86,7 +86,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.isOnBoard(5, -5);
+        boolean isOnBoard = board.isInsideBoard(5, -5);
 
         // then
         Assert.assertFalse(isOnBoard);
