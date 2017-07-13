@@ -184,9 +184,8 @@ class Game {
             } else if (board[x][y] == 'a') {
                 player.incrementStrength();
                 player.setCoOrdinates(x, y);
-            } else {
-                player.setCoOrdinates(x, y);
             }
+            player.setCoOrdinates(x, y);
             placePlayer();
             wolfMove();
             generateGrass();
@@ -227,11 +226,10 @@ class Game {
                 } else {
                     generateTortoise();
                 }
-            } else {
-                wolf.setCoOrdinates(x, y);
             }
+            wolf.setCoOrdinates(x, y);
+            placeWolf();
         }
-        placeWolf();
     }
 
     private void resetPlayerStrength() {
