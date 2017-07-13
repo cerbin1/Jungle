@@ -1,5 +1,7 @@
 package game;
 
+import static java.util.Arrays.stream;
+
 public class Board {
     private int width;
     private int height;
@@ -26,12 +28,10 @@ public class Board {
 
 
     public int countFreeSpaces() {
-        int freeSpaces = 0;
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (board[j][i] == ' ') freeSpaces++;
-            }
-        }
-        return freeSpaces;
+        return (int) stream(board)
+                .map(String::new)
+                .flatMapToInt(String::chars)
+                .filter(i -> i == ' ')
+                .count();
     }
 }
