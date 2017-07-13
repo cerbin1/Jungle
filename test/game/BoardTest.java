@@ -103,4 +103,16 @@ public class BoardTest {
         Assert.assertEquals(100, freeSpaces);
     }
 
+    @Test
+    public void shouldReturnTrueIfItIsEmptySpace() {
+        // given
+        Board board = getBoard();
+
+        // when
+        boolean isEmpty = board.isEmptySpace(0, 0);
+
+        // then
+        Assert.assertTrue(isEmpty);
+    }
+
 }

@@ -34,4 +34,8 @@ public class Board {
                 .filter(i -> i == ' ')
                 .count();
     }
+
+    public boolean isEmptySpace(int x, int y) {
+        return board[x][y] == ' ';
+    }
 }
