@@ -32,10 +32,6 @@ public abstract class Character {
         this.y = y;
     }
 
-    public void removeCharacterFrom(char[][] board) {
-        board[x][y] = ' ';
-    }
-
     public void incrementStrength() {
         strength++;
     }

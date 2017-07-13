@@ -49,7 +49,7 @@ class Game {
             y = player.getY();
         }
         if (board.isInsideBoard(x, y)) {
-            player.removeCharacterFrom(board.getBoard()); // Set remove in Board
+            board.removeCharacter(x, y);
             if (board.isWolf(x, y)) {
                 if (player.getStrength() > boar.getStrength()) {
                     System.out.println("Boar has been eaten");
@@ -92,7 +92,7 @@ class Game {
         int[] moves = Moves.getMove();
         int x = boar.getX() + moves[0], y = boar.getY() + moves[1];
         if (board.isInsideBoard(x, y)) {
-            boar.removeCharacterFrom(board.getBoard()); // Set remove in Board
+            board.removeCharacter(x, y);
             if (board.isGrass(x, y)) {
                 boar.incrementStrength();
                 boar.setCoOrdinates(x, y);

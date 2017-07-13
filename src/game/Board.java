@@ -158,4 +158,8 @@ public class Board {
     public boolean isApple(int x, int y) {
        return  board[x][y] == 'a';
     }
+
+    public void removeCharacter(int x, int y) {
+        board[x][y] = ' ';
+    }
 }
