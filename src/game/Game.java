@@ -5,10 +5,6 @@ import java.util.Random;
 class Game {
     private int width, height;
 
-    public char[][] getBoard() {
-        return board;
-    }
-
     private char[][] board;
 
     public Player getPlayer() {

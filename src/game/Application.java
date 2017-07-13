@@ -10,7 +10,7 @@ public class Application {
         Game game = new Game(4, 8);
         game.displayBoard();
         while (true) {
-            System.out.println("wasd to move, q to exit");
+            System.out.println("wasd + enter to move, q to exit");
             Scanner scanner = new Scanner(System.in);
             try {
                 char userInput = scanner.next().charAt(0);
