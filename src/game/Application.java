@@ -1,24 +1,24 @@
 package game;
 
 import java.io.IOException;
-import java.lang.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
+    private static final Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) throws IOException, InterruptedException {
         Game game = new Game(4, 8);
         game.displayBoard();
+        System.out.println("wasd + enter to move, q to exit");
         while (true) {
-            System.out.println("wasd + enter to move, q to exit");
-            Scanner scanner = new Scanner(System.in);
             try {
                 char userInput = scanner.next().charAt(0);
                 if (userInput == 'q') {
-                    System.out.println("Quiting game...");
+                    System.out.println("Quitting game...");
                     break;
                 }
-                if (isProperlyMove(userInput)) {
+                if (isCorrectMove(userInput)) {
                     game.makeMove(userInput);
                     game.displayBoard();
                 } else {
@@ -30,7 +30,7 @@ public class Application {
         }
     }
 
-    private static boolean isProperlyMove(java.lang.Character input) {
+    private static boolean isCorrectMove(java.lang.Character input) {
         return input == 'w' || input == 'a' || input == 's' || input == 'd';
     }
 }
