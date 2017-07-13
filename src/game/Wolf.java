@@ -5,12 +5,4 @@ public class Wolf extends Character {
         super(x, y);
         setStrength(strength);
     }
-
-    public Wolf(int x, int y) {
-        super(x, y);
-    }
-
-    public void incrementStrength() {
-        setStrength(getStrength() + 1);
-    }
 }
