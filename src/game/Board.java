@@ -155,7 +155,7 @@ public class Board {
        return  board[x][y] == 'a';
     }
 
-    public void removeCharacter(int x, int y) {
-        board[x][y] = ' ';
+    public void removeCharacter(Character character) {
+        board[character.getX()][character.getY()] = ' ';
     }
 }
