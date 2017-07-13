@@ -208,6 +208,7 @@ class Game {
             wolf.removeCharacterFrom(board);
             if (board[x][y] == '#') {
                 wolf.incrementStrength();
+                wolf.setCoOrdinates(x, y);
             } else if (board[x][y] == '@') {
                 if (getPlayer().getStrength() > wolf.getStrength()) {
                     generateWolf();
