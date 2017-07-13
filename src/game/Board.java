@@ -135,12 +135,8 @@ public class Board {
         return board;
     }
 
-    public boolean isWolf(int x, int y) {
-        return board[x][y] == 'w'; // TODO it is higher level of abstraction, there should be method is a Character, and in Game there should be method isWolf that would pass as parameter 'w'
-    }
-
     public boolean isBoar(int x, int y) {
-       return  board[x][y] == 'b';
+       return  board[x][y] == 'b'; // TODO it is higher level of abstraction, there should be method is a Character, and in Game there should be method isWolf that would pass as parameter 'b'
     }
 
     public boolean isTortoise(int x, int y) {
