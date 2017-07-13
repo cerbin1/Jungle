@@ -92,5 +92,15 @@ public class BoardTest {
         Assert.assertFalse(isOnBoard);
     }
 
+    @Test
+    public void shouldCountFreeSpaces() {
+        // given
+        Board board = getBoard();
+
+        // when
+        int freeSpaces = board.countFreeSpaces();
+        // then
+        Assert.assertEquals(100, freeSpaces);
+    }
 
 }
