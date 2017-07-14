@@ -31,67 +31,60 @@ class Game {
     }
 
     void makeMove(char direction) {
-        int[] move = moves.getMove(direction);
-        int x = player.getX() + move[0], y = player.getY() + move[1];
-        if (board.isInsideBoard(x, y)) {
-            board.removeCharacter(player);
-            if (isApple(x, y)) {
+        Point point = moves.getMove(direction);
+        if (board.include(point)) {
+            board.remove(player);
+            if (isAppleOn(point)) {
                 player.incrementStrength();
             }
-            if (isBoar(x, y)) {
+            if (isBoarOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, boar)) {
                     killBoar();
                 } else {
-                    killPlayer();
-                    x = player.getX();
-                    y = player.getY();
+                    killPlayer(point);
                 }
             }
-            if (isTortoise(x, y)) {
+            if (isTortoiseOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, tortoise)) {
                     killTortoise();
                 } else {
-                    killPlayer();
-                    x = player.getX();
-                    y = player.getY();
+                    killPlayer(point);
                 }
             }
-            if (isHare(x, y)) {
+            if (isHareOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, hare)) {
                     killHare();
                 } else {
-                    killPlayer();
-                    x = player.getX();
-                    y = player.getY();
+                    killPlayer(point);
                 }
             }
-            board.placePlayer(x, y);
-            player.setCoOrdinates(x, y);
+            board.placePlayer(point);
+            player.setCoOrdinates(point.getX(), point.getY());
             boarMove();
             generateNature();
         }
         System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
     }
 
-    private boolean isApple(int x, int y) {
-        return board.isApple(x, y);
+    private boolean isAppleOn(Point point) {
+        return board.isApple(point.getX(), point.getY());
     }
 
     private void killBoar() {
         System.out.println("Boar has been eaten");
-        board.removeCharacter(boar);
+        board.remove(boar);
         boar = board.generateBoar();
     }
 
     private void killTortoise() {
         System.out.println("Tortoise has been eaten");
-        board.removeCharacter(tortoise);
+        board.remove(tortoise);
         tortoise = board.generateTortoise();
     }
 
     private void killHare() {
         System.out.println("Hare has been eaten");
-        board.removeCharacter(hare);
+        board.remove(hare);
         hare = board.generateHare();
     }
 
@@ -112,29 +105,30 @@ class Game {
         board.generate('a');
     }
 
-    private boolean isBoar(int x, int y) {
-        return board.isBoar(x, y);
+    private boolean isBoarOn(Point point) {
+        return board.isBoar(point.getX(), point.getY());
     }
 
-    private boolean isTortoise(int x, int y) {
-        return board.isTortoise(x, y);
+    private boolean isTortoiseOn(Point point) {
+        return board.isTortoise(point.getX(), point.getY());
     }
 
-    private boolean isHare(int x, int y) {
-        return board.isHare(x, y);
+    private boolean isHareOn(Point point) {
+        return board.isHare(point.getX(), point.getY());
     }
 
-    void killPlayer() {
+    void killPlayer(Point point) {
         player = board.generatePlayer();
         player.resetStrength();
+        point.setLocation(player.getX(), player.getY());
         System.out.println("Player has been eaten!");
     }
 
     public void boarMove() {
         int[] move = moves.getMove();
         int x = boar.getX() + move[0], y = boar.getY() + move[1];
-        if (board.isInsideBoard(x, y)) {
-            board.removeCharacter(boar);
+        if (board.include(x, y)) {
+            board.remove(boar);
             if (isGrass(x, y)) {
                 boar.incrementStrength();
             } else if (board.isPlayer(x, y)) {
