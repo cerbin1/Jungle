@@ -35,7 +35,7 @@ class Game {
         int x = player.getX() + move[0], y = player.getY() + move[1];
         if (board.isInsideBoard(x, y)) {
             board.removeCharacter(player);
-            if (board.isBoar(x, y)) {
+            if (isBoar(x, y)) {
                 if (player.getStrength() > boar.getStrength()) {
                     System.out.println("Boar has been eaten");
                     boar = board.generateBoar();
@@ -53,6 +53,10 @@ class Game {
             board.generate('#');
         }
         System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
+    }
+
+    private boolean isBoar(int x, int y) {
+        return board.isBoar(x, y);
     }
 
     void killPlayer() {
