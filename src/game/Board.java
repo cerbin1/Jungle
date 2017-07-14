@@ -26,8 +26,8 @@ public class Board {
         }
     }
 
-    public boolean isInsideBoard(int x, int y) {
-        return 0 <= x && x < width && 0 <= y && y < height;
+    public boolean include(Point move) {
+        return 0 <= move.getX() && move.getX() < width && 0 <= move.getY() && move.getY() < height;
     }
 
     public void displayBoard() {
@@ -64,8 +64,8 @@ public class Board {
         }
     }
 
-    public void placePlayer(int x, int y) {
-        board[x][y] = '@';
+    public void placePlayer(Point point) {
+        board[point.getX()][point.getY()] = '@';
     }
 
     public void placeBoar(int x, int y) {
@@ -155,7 +155,7 @@ public class Board {
         return board[x][y] == 'a';
     }
 
-    public void removeCharacter(Character character) { // test
+    public void remove(Character character) { // test
         board[character.getX()][character.getY()] = ' ';
     }
 }
