@@ -11,9 +11,11 @@ class Game {
     private Boar boar;
     private Tortoise tortoise;
     private Hare hare;
+    private Moves moves;
 
     Game(int width, int height) {
         board = new Board(width, height);
+        moves = new Moves();
         generateCharacters();
         board.generate('a');
         board.generate('#');
@@ -29,23 +31,8 @@ class Game {
     }
 
     void makeMove(char direction) {
-        int x = -1, y = -1;
-        if (direction == 'w') {
-            x = player.getX();
-            y = player.getY() - 1;
-        }
-        if (direction == 's') {
-            x = player.getX();
-            y = player.getY() + 1;
-        }
-        if (direction == 'a') {
-            x = player.getX() - 1;
-            y = player.getY();
-        }
-        if (direction == 'd') {
-            x = player.getX() + 1;
-            y = player.getY();
-        }
+        int[] move = moves.getMove(direction);
+        int x = player.getX() + move[0], y = player.getY() + move[1];
         if (board.isInsideBoard(x, y)) {
             board.removeCharacter(player);
             if (board.isBoar(x, y)) {
@@ -75,8 +62,8 @@ class Game {
     }
 
     public void boarMove() {
-        int[] moves = Moves.getMove();
-        int x = boar.getX() + moves[0], y = boar.getY() + moves[1];
+        int[] move = moves.getMove();
+        int x = boar.getX() + move[0], y = boar.getY() + move[1];
         if (board.isInsideBoard(x, y)) {
             board.removeCharacter(boar);
             if (board.isGrass(x, y)) {
