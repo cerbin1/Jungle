@@ -9,11 +9,8 @@ import static org.junit.Assert.assertTrue;
 public class ApplicationTest {
     @Test
     public void shouldReturnPassCorrectMove() {
-        // given
-        boolean move;
-
         // when
-        move = isCorrectMove('w');
+        boolean move = isCorrectMove('w');
 
         // then
         assertTrue(move);
@@ -21,14 +18,10 @@ public class ApplicationTest {
 
     @Test
     public void shouldNotPassWrongMove() {
-        // given
-        boolean move;
-
         // when
-        move = isCorrectMove('c');
+        boolean move = isCorrectMove('c');
 
         // then
         assertFalse(move);
     }
-
 }
