@@ -18,8 +18,7 @@ class Game {
         board = new Board(width, height);
         moves = new Moves();
         generateCharacters();
-        board.generate('a');
-        board.generate('#');
+        generateNature();
     }
 
     private void generateCharacters() {
@@ -36,28 +35,93 @@ class Game {
         int x = player.getX() + move[0], y = player.getY() + move[1];
         if (board.isInsideBoard(x, y)) {
             board.removeCharacter(player);
+            if (isApple(x, y)) {
+                player.incrementStrength();
+            }
             if (isBoar(x, y)) {
-                if (player.getStrength() > boar.getStrength()) {
-                    System.out.println("Boar has been eaten");
-                    boar = board.generateBoar();
+                if (firstCharacterHasGreaterStrengthThanSecond(player, boar)) {
+                    killBoar();
                 } else {
                     killPlayer();
+                    x = player.getX();
+                    y = player.getY();
                 }
-            } else if (board.isApple(x, y)) {
-                player.incrementStrength();
-                player.setCoOrdinates(x, y);
+            }
+            if (isTortoise(x, y)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(player, tortoise)) {
+                    killTortoise();
+                } else {
+                    killPlayer();
+                    x = player.getX();
+                    y = player.getY();
+                }
+            }
+            if (isHare(x, y)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(player, hare)) {
+                    killHare();
+                } else {
+                    killPlayer();
+                    x = player.getX();
+                    y = player.getY();
+                }
             }
             board.placePlayer(x, y);
             player.setCoOrdinates(x, y);
             boarMove();
-            board.generate('a');
-            board.generate('#');
+            generateNature();
         }
         System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
     }
 
+    private boolean isApple(int x, int y) {
+        return board.isApple(x, y);
+    }
+
+    private void killBoar() {
+        System.out.println("Boar has been eaten");
+        board.removeCharacter(boar);
+        boar = board.generateBoar();
+    }
+
+    private void killTortoise() {
+        System.out.println("Tortoise has been eaten");
+        board.removeCharacter(tortoise);
+        tortoise = board.generateTortoise();
+    }
+
+    private void killHare() {
+        System.out.println("Hare has been eaten");
+        board.removeCharacter(hare);
+        hare = board.generateHare();
+    }
+
+    private boolean firstCharacterHasGreaterStrengthThanSecond(Character first, Character second) {
+        return first.getStrength() > second.getStrength();
+    }
+
+    private void generateNature() {
+        generateApple();
+        generateGrass();
+    }
+
+    private void generateGrass() {
+        board.generate('#');
+    }
+
+    private void generateApple() {
+        board.generate('a');
+    }
+
     private boolean isBoar(int x, int y) {
         return board.isBoar(x, y);
+    }
+
+    private boolean isTortoise(int x, int y) {
+        return board.isTortoise(x, y);
+    }
+
+    private boolean isHare(int x, int y) {
+        return board.isHare(x, y);
     }
 
     void killPlayer() {
@@ -71,9 +135,8 @@ class Game {
         int x = boar.getX() + move[0], y = boar.getY() + move[1];
         if (board.isInsideBoard(x, y)) {
             board.removeCharacter(boar);
-            if (board.isGrass(x, y)) {
+            if (isGrass(x, y)) {
                 boar.incrementStrength();
-                boar.setCoOrdinates(x, y);
             } else if (board.isPlayer(x, y)) {
                 if (getPlayer().getStrength() > boar.getStrength()) {
                     System.out.println("Boar has been eaten");
@@ -85,5 +148,9 @@ class Game {
             boar.setCoOrdinates(x, y);
             board.placeBoar(x, y);
         }
+    }
+
+    private boolean isGrass(int x, int y) {
+        return board.isGrass(x, y);
     }
 }
