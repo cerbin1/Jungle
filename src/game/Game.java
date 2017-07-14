@@ -11,6 +11,7 @@ class Game {
     private Boar boar;
     private Tortoise tortoise;
     private Hare hare;
+
     private Moves moves;
 
     Game(int width, int height) {

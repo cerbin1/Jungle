@@ -10,7 +10,6 @@ public class Moves {
         return moves[random.nextInt(3)];
     }
 
-
     public int[] getMove(char direction) {
         return getMoveDependingOnDirection(direction);
     }

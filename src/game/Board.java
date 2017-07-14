@@ -128,7 +128,7 @@ public class Board {
     }
 
     public boolean isPlayer(int x, int y) {
-        return  board[x][y] == '@';
+        return board[x][y] == '@';
     }
 
     public char[][] getBoard() {
@@ -136,26 +136,26 @@ public class Board {
     }
 
     public boolean isBoar(int x, int y) {
-       return  board[x][y] == 'b'; // TODO it is higher level of abstraction, there should be method is a Character, and in Game there should be method isWolf that would pass as parameter 'b'
+        return board[x][y] == 'b';
     }
 
     public boolean isTortoise(int x, int y) {
-       return  board[x][y] == 't';
+        return board[x][y] == 't';
     }
 
     public boolean isHare(int x, int y) {
-       return  board[x][y] == 'h';
+        return board[x][y] == 'h';
     }
 
     public boolean isGrass(int x, int y) {
-       return  board[x][y] == '#';
+        return board[x][y] == '#';
     }
 
     public boolean isApple(int x, int y) {
-       return  board[x][y] == 'a';
+        return board[x][y] == 'a';
     }
 
-    public void removeCharacter(Character character) {
+    public void removeCharacter(Character character) { // test
         board[character.getX()][character.getY()] = ' ';
     }
 }
