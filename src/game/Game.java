@@ -32,6 +32,7 @@ class Game {
 
     void makeMove(char direction) {
         Point point = moves.getMove(direction);
+        point.setLocation(point.getX() + player.getX(), point.getY() + player.getY());
         if (board.include(point)) {
             board.remove(player);
             if (isAppleOn(point)) {
@@ -109,6 +110,10 @@ class Game {
         return board.isBoar(point.getX(), point.getY());
     }
 
+    private boolean isPlayerOn(Point point) {
+        return board.isPlayer(point.getX(), point.getY());
+    }
+
     private boolean isTortoiseOn(Point point) {
         return board.isTortoise(point.getX(), point.getY());
     }
@@ -125,18 +130,32 @@ class Game {
     }
 
     public void boarMove() {
-        int[] move = moves.getMove();
-        int x = boar.getX() + move[0], y = boar.getY() + move[1];
-        if (board.include(x, y)) {
+        Point point = moves.getMove();
+        point.setLocation(point.getX() + boar.getX(), point.getY() + boar.getY());
+        if (board.include(point)) {
             board.remove(boar);
-            if (isGrass(x, y)) {
+            if (isGrassOn(point)) {
                 boar.incrementStrength();
-            } else if (board.isPlayer(x, y)) {
-                if (getPlayer().getStrength() > boar.getStrength()) {
-                    System.out.println("Boar has been eaten");
-                    boar = board.generateBoar();
+            }
+            if (isPlayerOn(point)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(boar, player)) {
+                    killBoar();
                 } else {
-                    killPlayer();
+                    killPlayer(point);
+                }
+            }
+            if (isTortoiseOn(point)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(player, tortoise)) {
+                    killTortoise();
+                } else {
+                    killPlayer(point);
+                }
+            }
+            if (isHareOn(point)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(player, hare)) {
+                    killHare();
+                } else {
+                    killPlayer(point);
                 }
             }
             boar.setCoOrdinates(x, y);
@@ -144,7 +163,7 @@ class Game {
         }
     }
 
-    private boolean isGrass(int x, int y) {
-        return board.isGrass(x, y);
+    private boolean isGrassOn(Point point) {
+        return board.isGrass(point.getX(), point.getY());
     }
 }
