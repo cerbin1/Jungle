@@ -130,7 +130,7 @@ class Game {
     }
 
     public void boarMove() {
-        Point point = moves.getMove();
+        Point point = moves.getRandomMove();
         point.setLocation(point.getX() + boar.getX(), point.getY() + boar.getY());
         if (board.include(point)) {
             board.remove(boar);
