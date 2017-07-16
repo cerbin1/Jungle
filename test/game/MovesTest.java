@@ -19,7 +19,7 @@ public class MovesTest {
     }
 
     @Test
-    public void shouldNotGetNeMove() {
+    public void shouldNotGetMove() {
         // given
         Moves moves = new Moves();
 

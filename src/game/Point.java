@@ -27,8 +27,7 @@ public class Point {
         if (other == this) return true;
         if (!(other instanceof Point)) return false;
         Point point = (Point) other;
-        if (x != point.x) return false;
-        return y == point.y;
+        return x == point.x && y == point.y;
     }
 
 
