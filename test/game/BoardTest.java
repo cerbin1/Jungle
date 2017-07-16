@@ -120,9 +120,10 @@ public class BoardTest {
     public void shouldPlaceCharacterOnBoard() {
         // given
         Board board = getBoard();
+        Character player = new Player(0, 0);
 
         // when
-        board.placePlayer(new Point(0, 0));
+        board.place(player);
 
         // then
         assertEquals(99, board.countFreeSpaces());
