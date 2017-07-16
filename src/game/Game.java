@@ -36,7 +36,6 @@ class Game {
         Point point = new Point(move.getX() + player.getX(), move.getY() + player.getY());
         System.out.println(point);
         if (board.include(point)) {
-            System.out.println("Da sie robic ruch");
             board.remove(player);
             if (isAppleOn(point)) {
                 player.incrementStrength();
@@ -142,43 +141,37 @@ class Game {
     }
 
     public void boarMove() {
-        Point dupa = moves.getRandomMove();
-        System.out.println(dupa);
-        dupa.setLocation(dupa.getX() + boar.getX(), dupa.getY() + boar.getY());
-        if (board.include(dupa)) {
-            if (board.isEmptySpace(dupa.getX(), dupa.getY())) {
-                board.remove(boar);
-                boar.setCoOrdinates(dupa.getX(), dupa.getY());
+        Point move = moves.getRandomMove();
+        System.out.println(move);
+        Point point = new Point(move.getX() + boar.getX(), move.getY() + boar.getY());
+        if (board.include(point)) {
+            board.remove(boar);
+            if (isGrassOn(point)) {
+                boar.incrementStrength();
             }
+            if (isPlayerOn(point)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(boar, player)) {
+                    killPlayer(point);
+                } else {
+                    killBoar(point);
+                }
+            }
+            if (isTortoiseOn(point)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(boar, tortoise)) {
+                    killTortoise(boar);
+                } else {
+                    killBoar(point);
+                }
+            }
+            if (isHareOn(point)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(boar, hare)) {
+                    killHare(boar);
+                } else {
+                    killBoar(point);
+                }
+            }
+            placeCharacters();
         }
-            /*if (board.include(dupa)) {
-                board.remove(boar);
-                if (isGrassOn(dupa)) {
-                    boar.incrementStrength();
-                }
-                if (isPlayerOn(dupa)) {
-                    if (firstCharacterHasGreaterStrengthThanSecond(boar, player)) {
-                        killPlayer(dupa);
-                    } else {
-                        killBoar(dupa);
-                    }
-                }
-                if (isTortoiseOn(dupa)) {
-                    if (firstCharacterHasGreaterStrengthThanSecond(boar, tortoise)) {
-                        killTortoise(boar);
-                    } else {
-                        killBoar(dupa);
-                    }
-                }
-                if (isHareOn(dupa)) {
-                    if (firstCharacterHasGreaterStrengthThanSecond(boar, hare)) {
-                        killHare(boar);
-                    } else {
-                        killBoar(dupa);
-                    }
-                }
-                placeCharacters();
-            }*/
     }
 
     private boolean isGrassOn(Point point) {
