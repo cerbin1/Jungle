@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class BoardTest {
     private static Board getBoard() {
-        return new Board(10, 10);
+        return new Board(10, 10, null);
     }
 
     @Test

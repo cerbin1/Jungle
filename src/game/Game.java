@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Game {
     private Board board;
 
@@ -8,12 +11,15 @@ class Game {
     private Tortoise tortoise;
     private Hare hare;
 
+    private List<Character> characters = new ArrayList<>();
+
     private Moves moves;
 
     Game(int width, int height) {
-        board = new Board(width, height);
         moves = new Moves();
+        board = new Board(width, height, characters);
         generateCharacters();
+        addCharactersToList();
         generateNature();
     }
 
@@ -161,5 +167,12 @@ class Game {
             boar.setCoordination(point);
             placeCharacters();
         }
+    }
+
+    public void addCharactersToList() {
+        characters.add(player);
+        characters.add(boar);
+        characters.add(tortoise);
+        characters.add(hare);
     }
 }

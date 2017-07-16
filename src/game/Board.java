@@ -10,16 +10,21 @@ public class Board {
     private int width;
     private int height;
     private final char[][] board;
+
     private final List<Point> grass;
     private final List<Point> apples;
+
+    private List<Character> characters;
+
     private final static Random random = new Random();
 
-    public Board(int width, int height) {
+    public Board(int width, int height, List<Character> characters) {
         this.width = width;
         this.height = height;
         board = new char[width][height];
         grass = new ArrayList<>();
         apples = new ArrayList<>();
+        this.characters = characters;
         fillBoardWithSpaces();
     }
 
@@ -36,6 +41,19 @@ public class Board {
     }
 
     public void displayBoard() {
+        fillBoardWithSpaces();
+        for (Character character : characters) {
+            board[character.getX()][character.getY()] = character.getCharacter();
+        }
+
+        for (Point point : grass) {
+            board[point.getX()][point.getY()] = '#';
+        }
+
+        for (Point point : apples) {
+            board[point.getX()][point.getY()] = 'a';
+        }
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 System.out.print(board[j][i]);
