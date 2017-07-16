@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static java.util.Arrays.stream;
@@ -8,13 +10,16 @@ public class Board {
     private int width;
     private int height;
     private final char[][] board;
-
+    private final List<Point> grass;
+    private final List<Point> apples;
     private final static Random random = new Random();
 
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
         board = new char[width][height];
+        grass = new ArrayList<>();
+        apples = new ArrayList<>();
         fillBoardWithSpaces();
     }
 
@@ -45,19 +50,6 @@ public class Board {
                 .flatMapToInt(String::chars)
                 .filter(i -> i == ' ')
                 .count();
-    }
-
-    public void generate(char character) {
-        if (countFreeSpaces() != 0) {
-            while (true) {
-                int x = random.nextInt(width);
-                int y = random.nextInt(height);
-                if (isEmptySpace(x, y)) {
-                    board[x][y] = character;
-                    break;
-                }
-            }
-        }
     }
 
     public Player generatePlayer() {
@@ -141,5 +133,26 @@ public class Board {
 
     public void place(Character character) {
         board[character.getX()][character.getY()] = character.getCharacter();
+    }
+
+    public void generateGrass() {
+        generateNature(grass);
+    }
+
+    public void generateApple() {
+        generateNature(apples);
+    }
+
+    private void generateNature(List<Point> list) {
+        if (countFreeSpaces() != 0) {
+            while (true) {
+                int x = random.nextInt(width);
+                int y = random.nextInt(height);
+                if (isEmptySpace(x, y)) {
+                    list.add(new Point(x, y));
+                    break;
+                }
+            }
+        }
     }
 }

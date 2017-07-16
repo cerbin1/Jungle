@@ -100,16 +100,8 @@ class Game {
     }
 
     private void generateNature() {
-        generateApple();
-        generateGrass();
-    }
-
-    private void generateGrass() {
-        board.generate('#');
-    }
-
-    private void generateApple() {
-        board.generate('a');
+        board.generateGrass();
+        board.generateApple();
     }
 
     private boolean isBoarOn(Point point) {
