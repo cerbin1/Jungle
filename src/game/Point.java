@@ -22,6 +22,17 @@ public class Point {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof Point)) return false;
+        Point point = (Point) other;
+        if (x != point.x) return false;
+        return y == point.y;
+    }
+
+
+    @Override
     public String toString() {
         return "Point{" +
                 "x=" + x +
