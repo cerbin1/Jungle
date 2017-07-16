@@ -14,6 +14,7 @@ public class Application {
             char userInput = scanner.next().charAt(0);
             if (userInput == 'q') {
                 System.out.println("Quitting game...");
+                System.exit(0);
                 break;
             }
             if (isCorrectMove(userInput)) {
