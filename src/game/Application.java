@@ -9,7 +9,7 @@ public class Application {
     public static void main(String[] args) throws IOException, InterruptedException {
         Game game = new Game(4, 8);
         game.displayBoard();
-        System.out.println("wasd + enter to move, q to exit");
+        displayHint();
         while (true) {
             char userInput = scanner.next().charAt(0);
             if (userInput == 'q') {
@@ -21,8 +21,13 @@ public class Application {
                 game.displayBoard();
             } else {
                 System.out.println("Wrong move!");
+                displayHint();
             }
         }
+    }
+
+    private static void displayHint() {
+        System.out.println("wasd + enter to move, q to exit");
     }
 
     static boolean isCorrectMove(java.lang.Character input) {
