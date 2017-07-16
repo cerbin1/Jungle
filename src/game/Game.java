@@ -11,15 +11,12 @@ class Game {
     private Tortoise tortoise;
     private Hare hare;
 
-    private List<Character> characters = new ArrayList<>();
-
     private Moves moves;
 
     Game(int width, int height) {
         moves = new Moves();
-        board = new Board(width, height, characters);
+        board = new Board(width, height, this);
         generateCharacters();
-        addCharactersToList();
         generateNature();
     }
 
@@ -38,7 +35,7 @@ class Game {
         if (board.include(newPosition)) {
             board.remove(player);
             if (isAppleOn(newPosition)) {
-                player.incrementStrength();
+                giveAppleToPlayer(newPosition);
             }
             if (isBoarOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, boar)) {
@@ -66,7 +63,12 @@ class Game {
             boarMove();
             generateNature();
         }
-        System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
+        System.out.println(player.getX() + ", " + player.getY() + "b, strength: " + player.getStrength());
+    }
+
+    private void giveAppleToPlayer(Point applePosition) {
+        player.incrementStrength();
+        board.removeApple(applePosition);
     }
 
     private void placeCharacters() {
@@ -169,10 +171,10 @@ class Game {
         }
     }
 
-    public void addCharactersToList() {
+    public List<Character> getCharacters() {
+        List<Character> characters = new ArrayList<>(2);
         characters.add(player);
         characters.add(boar);
-        characters.add(tortoise);
-        characters.add(hare);
+        return characters;
     }
 }

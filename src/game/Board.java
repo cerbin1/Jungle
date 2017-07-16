@@ -14,17 +14,17 @@ public class Board {
     private final List<Point> grass;
     private final List<Point> apples;
 
-    private List<Character> characters;
+    private Game game;
 
     private final static Random random = new Random();
 
-    public Board(int width, int height, List<Character> characters) {
+    public Board(int width, int height, Game game) {
+        this.game = game;
         this.width = width;
         this.height = height;
         board = new char[width][height];
         grass = new ArrayList<>();
         apples = new ArrayList<>();
-        this.characters = characters;
         fillBoardWithSpaces();
     }
 
@@ -42,7 +42,7 @@ public class Board {
 
     public void displayBoard() {
         fillBoardWithSpaces();
-        for (Character character : characters) {
+        for (Character character : game.getCharacters()) {
             board[character.getX()][character.getY()] = character.getCharacter();
         }
 
@@ -172,5 +172,9 @@ public class Board {
                 }
             }
         }
+    }
+
+    public void removeApple(Point applePosition) {
+        apples.remove(applePosition);
     }
 }
