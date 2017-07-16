@@ -39,7 +39,7 @@ class Game {
             board.remove(player);
             if (isAppleOn(point)) {
                 player.incrementStrength();
-                player.setCoOrdinates(point.getX(), point.getY());
+                player.setCoordination(point.getX(), point.getY());
             }
             if (isBoarOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, boar)) {
@@ -62,7 +62,7 @@ class Game {
                     killPlayer(point);
                 }
             }
-            player.setCoOrdinates(point.getX(), point.getY());
+            player.setCoordination(point.getX(), point.getY());
             placeCharacters();
             boarMove();
             generateNature();
@@ -94,14 +94,14 @@ class Game {
     }
 
     private void killTortoise(Character killer) {
-        killer.setCoOrdinates(tortoise.getX(), tortoise.getY());
+        killer.setCoordination(tortoise.getX(), tortoise.getY());
         board.remove(tortoise);
         tortoise = board.generateTortoise();
         System.out.println("Tortoise has been eaten");
     }
 
     private void killHare(Character killer) {
-        killer.setCoOrdinates(hare.getX(), hare.getY());
+        killer.setCoordination(hare.getX(), hare.getY());
         board.remove(hare);
         hare = board.generateHare();
         System.out.println("Hare has been eaten");

@@ -41,7 +41,7 @@ public class CharacterTest {
         Character character = new Player(0, 0);
 
         // when
-        character.setCoOrdinates(15, 23);
+        character.setCoordination(15, 23);
 
         // then
         assertEquals(15, character.getX());
@@ -54,7 +54,7 @@ public class CharacterTest {
         Character character = new Player(0, 0);
 
         // when
-        character.setCoOrdinates(-12, 32);
+        character.setCoordination(-12, 32);
 
         // then
         assertEquals(0, character.getX());
