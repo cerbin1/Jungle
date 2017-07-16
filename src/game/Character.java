@@ -30,7 +30,8 @@ public abstract class Character {
         strength++;
     }
 
-    public void setCoordination(int x, int y) {
+    public void setCoordination(Point point) {
+        int x = point.getX(), y = point.getY();
         if (x >= 0 && y >= 0) {
             this.x = x;
             this.y = y;

@@ -37,7 +37,7 @@ class Game {
             board.remove(player);
             if (isAppleOn(point)) {
                 player.incrementStrength();
-                player.setCoordination(point.getX(), point.getY());
+                player.setCoordination(point);
             }
             if (isBoarOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, boar)) {
@@ -60,7 +60,7 @@ class Game {
                     killPlayer(point);
                 }
             }
-            player.setCoordination(point.getX(), point.getY());
+            player.setCoordination(point);
             placeCharacters();
             boarMove();
             generateNature();
@@ -167,7 +167,7 @@ class Game {
                     killBoar(point);
                 }
             }
-            boar.setCoordination(point.getX(), point.getY());
+            boar.setCoordination(point);
             placeCharacters();
         }
     }
