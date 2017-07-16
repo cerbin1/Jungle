@@ -32,9 +32,7 @@ class Game {
 
     void makeMove(char direction) {
         Point move = moves.getMove(direction);
-        System.out.println(move);
         Point point = new Point(move.getX() + player.getX(), move.getY() + player.getY());
-        System.out.println(point);
         if (board.include(point)) {
             board.remove(player);
             if (isAppleOn(point)) {
@@ -67,7 +65,6 @@ class Game {
             boarMove();
             generateNature();
         }
-        System.out.println("Punkt: " + point.toString());
         System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
     }
 
