@@ -64,22 +64,6 @@ public class Board {
         }
     }
 
-    public void placePlayer(Point point) {
-        board[point.getX()][point.getY()] = '@';
-    }
-
-    public void placeBoar(int x, int y) {
-        board[x][y] = 'b';
-    }
-
-    public void placeTortoise(int x, int y) {
-        board[x][y] = 't';
-    }
-
-    public void placeHare(int x, int y) {
-        board[x][y] = 'h';
-    }
-
     public Player generatePlayer() {
         while (true) {
             int x = random.nextInt(width);
