@@ -158,4 +158,8 @@ public class Board {
     public void remove(Character character) { // test
         board[character.getX()][character.getY()] = ' ';
     }
+
+    public void place(Character character) {
+        board[character.getX()][character.getY()] = character.getCharacter();
+    }
 }

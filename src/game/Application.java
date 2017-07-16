@@ -10,6 +10,7 @@ public class Application {
         Game game = new Game(4, 8);
         game.displayBoard();
         System.out.println("wasd + enter to move, q to exit");
+        System.out.println(game.getPlayer().getX() + ", " + game.getPlayer().getY());
         while (true) {
             char userInput = scanner.next().charAt(0);
             if (userInput == 'q') {

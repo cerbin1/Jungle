@@ -2,10 +2,12 @@ package game;
 
 public abstract class Character {
     private int strength = 0, x, y;
+    private final char character;
 
-    protected Character(int x, int y) {
+    protected Character(int x, int y, char character) {
         this.x = x;
         this.y = y;
+        this.character = character;
     }
 
     public void setStrength(int strength) {
@@ -33,5 +35,9 @@ public abstract class Character {
             this.x = x;
             this.y = y;
         }
+    }
+
+    public char getCharacter() {
+        return character;
     }
 }
