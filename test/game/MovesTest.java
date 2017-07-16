@@ -12,10 +12,10 @@ public class MovesTest {
         Moves moves = new Moves();
 
         // when
-       int[] array = moves.getMove('w');
+        Point point = moves.getMove('w');
 
         // then
-        assertArrayEquals(new int[]{0, -1}, array);
+        assertEquals(new Point(0, -1), point);
     }
 
     @Test
@@ -24,9 +24,9 @@ public class MovesTest {
         Moves moves = new Moves();
 
         // when
-        int[] array = moves.getMove(' ');
+        Point point = moves.getMove(' ');
 
         // then
-        assertArrayEquals(new int[]{0, 0}, array);
+        assertEquals(new Point(0, 0), point);
     }
 }

@@ -15,7 +15,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.include(5, 5);
+        boolean isOnBoard = board.include(new Point(5, 5));
 
         // then
         assertTrue(isOnBoard);
@@ -27,7 +27,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.include(10, 5);
+        boolean isOnBoard = board.include(new Point(10, 5));
 
         // then
         assertFalse(isOnBoard);
@@ -39,7 +39,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.include(15, 5);
+        boolean isOnBoard = board.include(new Point(15, 5));
 
         // then
         assertFalse(isOnBoard);
@@ -51,7 +51,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.include(-5, 5);
+        boolean isOnBoard = board.include(new Point(-5, 5));
 
         // then
         assertFalse(isOnBoard);
@@ -63,7 +63,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.include(5, 10);
+        boolean isOnBoard = board.include(new Point(5, 10));
 
         // then
         assertFalse(isOnBoard);
@@ -75,7 +75,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.include(5, 15);
+        boolean isOnBoard = board.include(new Point(5, 15));
 
         // then
         assertFalse(isOnBoard);
@@ -87,7 +87,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isOnBoard = board.include(5, -5);
+        boolean isOnBoard = board.include(new Point(5, -5));
 
         // then
         assertFalse(isOnBoard);
@@ -122,7 +122,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        board.placePlayer(0, 0);
+        board.placePlayer(new Point(0, 0));
 
         // then
         assertEquals(99, board.countFreeSpaces());
