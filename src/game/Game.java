@@ -3,10 +3,6 @@ package game;
 class Game {
     private Board board;
 
-    public Player getPlayer() {
-        return player;
-    }
-
     private Player player;
     private Boar boar;
     private Tortoise tortoise;
@@ -72,10 +68,6 @@ class Game {
         board.place(boar);
     }
 
-    private boolean isAppleOn(Point point) {
-        return board.isApple(point.getX(), point.getY());
-    }
-
     private void killBoar(Point point) {
         point.setLocation(boar.getX(), boar.getY());
         System.out.println("Boar has been eaten");
@@ -136,6 +128,14 @@ class Game {
         return board.isHare(point.getX(), point.getY());
     }
 
+    private boolean isGrassOn(Point point) {
+        return board.isGrass(point.getX(), point.getY());
+    }
+
+    private boolean isAppleOn(Point point) {
+        return board.isApple(point.getX(), point.getY());
+    }
+
     public void boarMove() {
         Point move = moves.getRandomMove();
         System.out.println(move);
@@ -169,9 +169,5 @@ class Game {
             boar.setCoordination(point);
             placeCharacters();
         }
-    }
-
-    private boolean isGrassOn(Point point) {
-        return board.isGrass(point.getX(), point.getY());
     }
 }

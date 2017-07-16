@@ -30,7 +30,6 @@ public class Point {
         return x == point.x && y == point.y;
     }
 
-
     @Override
     public String toString() {
         return "Point{" +
