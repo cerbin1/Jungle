@@ -28,34 +28,34 @@ class Game {
 
     void makeMove(char direction) {
         Point move = moves.getMove(direction);
-        Point point = new Point(move.getX() + player.getX(), move.getY() + player.getY());
-        if (board.include(point)) {
+        Point newPosition = new Point(move.getX() + player.getX(), move.getY() + player.getY());
+        if (board.include(newPosition)) {
             board.remove(player);
-            if (isAppleOn(point)) {
+            if (isAppleOn(newPosition)) {
                 player.incrementStrength();
             }
-            if (isBoarOn(point)) {
+            if (isBoarOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, boar)) {
-                    killBoar(point);
+                    killBoar(newPosition);
                 } else {
-                    killPlayer(point);
+                    killPlayer(newPosition);
                 }
             }
-            if (isTortoiseOn(point)) {
+            if (isTortoiseOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, tortoise)) {
-                    killTortoise(point);
+                    killTortoise(newPosition);
                 } else {
-                    killPlayer(point);
+                    killPlayer(newPosition);
                 }
             }
-            if (isHareOn(point)) {
+            if (isHareOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, hare)) {
-                    killHare(point);
+                    killHare(newPosition);
                 } else {
-                    killPlayer(point);
+                    killPlayer(newPosition);
                 }
             }
-            player.setCoordination(point);
+            player.setCoordination(newPosition);
             placeCharacters();
             boarMove();
             generateNature();
