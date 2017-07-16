@@ -63,7 +63,7 @@ class Game {
             boarMove();
             generateNature();
         }
-        System.out.println(player.getX() + ", " + player.getY() + "b, strength: " + player.getStrength());
+        System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
     }
 
     private void giveAppleToPlayer(Point applePosition) {
@@ -138,7 +138,6 @@ class Game {
 
     public void boarMove() {
         Point move = moves.getRandomMove();
-        System.out.println(move);
         Point point = new Point(move.getX() + boar.getX(), move.getY() + boar.getY());
         if (board.include(point)) {
             board.remove(boar);
