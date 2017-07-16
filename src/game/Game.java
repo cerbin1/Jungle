@@ -48,14 +48,14 @@ class Game {
             }
             if (isTortoiseOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, tortoise)) {
-                    killTortoise(player);
+                    killTortoise(point);
                 } else {
                     killPlayer(point);
                 }
             }
             if (isHareOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, hare)) {
-                    killHare(player);
+                    killHare(point);
                 } else {
                     killPlayer(point);
                 }
@@ -90,15 +90,15 @@ class Game {
         System.out.println("Player has been eaten!");
     }
 
-    private void killTortoise(Character killer) {
-        killer.setCoordination(tortoise.getX(), tortoise.getY());
+    private void killTortoise(Point point) {
+        point.setLocation(tortoise.getX(), tortoise.getY());
         board.remove(tortoise);
         tortoise = board.generateTortoise();
         System.out.println("Tortoise has been eaten");
     }
 
-    private void killHare(Character killer) {
-        killer.setCoordination(hare.getX(), hare.getY());
+    private void killHare(Point point) {
+        point.setLocation(hare.getX(), hare.getY());
         board.remove(hare);
         hare = board.generateHare();
         System.out.println("Hare has been eaten");
@@ -155,18 +155,19 @@ class Game {
             }
             if (isTortoiseOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, tortoise)) {
-                    killTortoise(boar);
+                    killTortoise(point);
                 } else {
                     killBoar(point);
                 }
             }
             if (isHareOn(point)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, hare)) {
-                    killHare(boar);
+                    killHare(point);
                 } else {
                     killBoar(point);
                 }
             }
+            boar.setCoordination(point.getX(), point.getY());
             placeCharacters();
         }
     }
