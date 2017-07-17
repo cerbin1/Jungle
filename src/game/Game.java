@@ -62,7 +62,7 @@ class Game {
                 board.removeGrass(newPosition);
             }
 
-            player.setCoordination(newPosition);
+            player.setPosition(newPosition);
             boarMove();
             generateNature();
         }
@@ -72,11 +72,6 @@ class Game {
     private void giveAppleToPlayer(Point applePosition) {
         player.incrementStrength();
         board.removeApple(applePosition);
-    }
-
-    private void placeCharacters() {
-        board.place(player);
-        board.place(boar);
     }
 
     private void killBoar(Point point) {
@@ -94,14 +89,12 @@ class Game {
 
     private void killTortoise(Point point) {
         point.setLocation(tortoise.getX(), tortoise.getY());
-        board.remove(tortoise);
         tortoise = board.generateTortoise();
         System.out.println("Tortoise has been eaten");
     }
 
     private void killHare(Point point) {
         point.setLocation(hare.getX(), hare.getY());
-        board.remove(hare);
         hare = board.generateHare();
         System.out.println("Hare has been eaten");
     }
@@ -115,28 +108,28 @@ class Game {
         board.generateApple();
     }
 
-    private boolean isBoarOn(Point point) {
-        return board.isBoar(point.getX(), point.getY());
+    private boolean isPlayerOn(Point point) {
+        return player.isOnPosition(point);
     }
 
-    private boolean isPlayerOn(Point point) {
-        return board.isPlayer(point.getX(), point.getY());
+    private boolean isBoarOn(Point point) {
+        return boar.isOnPosition(point);
     }
 
     private boolean isTortoiseOn(Point point) {
-        return board.isTortoise(point.getX(), point.getY());
+        return tortoise.isOnPosition(point);
     }
 
     private boolean isHareOn(Point point) {
-        return board.isHare(point.getX(), point.getY());
+        return hare.isOnPosition(point);
     }
 
     private boolean isGrassOn(Point point) {
-        return board.isGrass(point.getX(), point.getY());
+        return board.isGrassOn(point);
     }
 
     private boolean isAppleOn(Point point) {
-        return board.isApple(point.getX(), point.getY());
+        return board.isAppleOn(point);
     }
 
     public void boarMove() {
@@ -171,7 +164,7 @@ class Game {
             if (isAppleOn(newPosition)) {
                 board.removeApple(newPosition);
             }
-            boar.setCoordination(newPosition);
+            boar.setPosition(newPosition);
         }
     }
 

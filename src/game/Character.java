@@ -1,12 +1,12 @@
 package game;
 
 public abstract class Character {
-    private int strength = 0, x, y;
+    private int strength = 0;
+    private Point position;
     private final char character;
 
-    protected Character(int x, int y, char character) {
-        this.x = x;
-        this.y = y;
+    protected Character(Point position, char character) {
+        this.position = position;
         this.character = character;
     }
 
@@ -19,26 +19,32 @@ public abstract class Character {
     }
 
     public int getX() {
-        return x;
+        return position.getX();
     }
 
     public int getY() {
-        return y;
+        return position.getY();
     }
 
     public void incrementStrength() {
         strength++;
     }
 
-    public void setCoordination(Point point) {
-        int x = point.getX(), y = point.getY();
-        if (x >= 0 && y >= 0) {
-            this.x = x;
-            this.y = y;
+    public void setPosition(Point position) {
+        if (position.getY() >= 0 && position.getY() >= 0) {
+            this.position = position;
         }
+    }
+
+    public boolean standsOn(Point otherPosition) {
+        return position.equals(otherPosition);
     }
 
     public char getCharacter() {
         return character;
+    }
+
+    public boolean isOnPosition(Point position) {
+        return this.position.equals(position);
     }
 }

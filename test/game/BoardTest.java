@@ -93,6 +93,7 @@ public class BoardTest {
         assertFalse(isOnBoard);
     }
 
+
     @Test
     public void shouldCountFreeSpaces() {
         // given
@@ -110,7 +111,7 @@ public class BoardTest {
         Board board = getBoard();
 
         // when
-        boolean isEmpty = board.isEmptySpace(0, 0);
+        boolean isEmpty = board.isEmptySpaceOn(new Point(0, 0));
 
         // then
         assertTrue(isEmpty);
@@ -127,6 +128,6 @@ public class BoardTest {
 
         // then
         assertEquals(99, board.countFreeSpaces());
-        assertFalse(board.isEmptySpace(0, 0));
+        assertFalse(board.isEmptySpaceOn(new Point(0, 0)));
     }
 }

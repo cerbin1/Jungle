@@ -72,77 +72,53 @@ public class Board {
 
     public Player generatePlayer() {
         while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (isEmptySpace(x, y)) {
-                board[x][y] = '@';
-                return new Player(x, y);
+            Point point = getRandomPoint();
+            if (isEmptySpaceOn(point)) {
+                return new Player(point);
             }
         }
     }
 
     public Boar generateBoar() {
         while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (isEmptySpace(x, y)) {
+            Point point = getRandomPoint();
+            if (isEmptySpaceOn(point)) {
                 int strength = random.nextInt(3);
-                board[x][y] = 'b';
-                return new Boar(x, y, strength);
+                return new Boar(point, strength);
             }
         }
     }
 
     public Tortoise generateTortoise() {
         while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (isEmptySpace(x, y)) {
+            Point point = getRandomPoint();
+            if (isEmptySpaceOn(point)) {
                 int strength = random.nextInt(2);
-                board[x][y] = 't';
-                return new Tortoise(x, y, strength);
+                return new Tortoise(point, strength);
             }
         }
     }
 
     public Hare generateHare() {
         while (true) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            if (isEmptySpace(x, y)) {
+            Point point = getRandomPoint();
+            if (isEmptySpaceOn(point)) {
                 int strength = random.nextInt(1);
-                board[x][y] = 'h';
-                return new Hare(x, y, strength);
+                return new Hare(point, strength);
             }
         }
     }
 
-    public boolean isEmptySpace(int x, int y) {
-        return board[x][y] == ' ';
+    public boolean isEmptySpaceOn(Point point) {
+        return !grass.contains(point) && !apples.contains(point) && game.getCharacters().stream().noneMatch(character -> character.isOnPosition(point));
     }
 
-    public boolean isPlayer(int x, int y) {
-        return board[x][y] == '@';
+    public boolean isAppleOn(Point position) {
+        return apples.contains(position);
     }
 
-    public boolean isBoar(int x, int y) {
-        return board[x][y] == 'b';
-    }
-
-    public boolean isTortoise(int x, int y) {
-        return board[x][y] == 't';
-    }
-
-    public boolean isHare(int x, int y) {
-        return board[x][y] == 'h';
-    }
-
-    public boolean isGrass(int x, int y) {
-        return board[x][y] == '#';
-    }
-
-    public boolean isApple(int x, int y) {
-        return board[x][y] == 'a';
+    public boolean isGrassOn(Point position) {
+        return grass.contains(position);
     }
 
     public void remove(Character character) {
@@ -164,17 +140,24 @@ public class Board {
     private void generateNature(List<Point> list) {
         if (countFreeSpaces() != 0) {
             while (true) {
-                int x = random.nextInt(width);
-                int y = random.nextInt(height);
-                if (isEmptySpace(x, y)) {
-                    list.add(new Point(x, y));
+                Point point = getRandomPoint();
+                if (isEmptySpaceOn(point)) {
+                    list.add(point);
                     break;
                 }
             }
         }
     }
 
+    private Point getRandomPoint() {
+        return new Point(random.nextInt(width), random.nextInt(height));
+    }
+
     public void removeApple(Point applePosition) {
         apples.remove(applePosition);
+    }
+
+    public void removeGrass(Point grassPosition) {
+        apples.remove(grassPosition);
     }
 }
