@@ -8,7 +8,7 @@ public class PlayerTest {
     @Test
     public void shouldResetPlayerStrength() {
         // given
-        Player player = new Player(0, 0);
+        Player player = new Player(new Point(0, 0));
         player.setStrength(15);
         int strengthBefore = player.getStrength();
 

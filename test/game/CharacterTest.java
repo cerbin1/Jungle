@@ -11,7 +11,7 @@ public class CharacterTest {
         Character character;
 
         // when
-        character = new Player(0, 0);
+        character = new Player(new Point(0, 0));
 
         // then
         assertEquals(0, character.getX());
@@ -22,7 +22,7 @@ public class CharacterTest {
     @Test
     public void shouldIncrementStrength() {
         // given
-        Character character = new Player(0, 0);
+        Character character = new Player(new Point(0, 0));
         int strengthBefore = character.getStrength();
 
         // when
@@ -38,7 +38,7 @@ public class CharacterTest {
     @Test
     public void shouldSetCoordinates() {
         // given
-        Character character = new Player(0, 0);
+        Character character = new Player(new Point(0, 0));
 
         // when
         character.setPosition(new Point(15, 23));
@@ -51,7 +51,7 @@ public class CharacterTest {
     @Test
     public void shouldNotSetCoordinates() {
         // given
-        Character character = new Player(0, 0);
+        Character character = new Player(new Point(0, 0));
 
         // when
         character.setPosition(new Point(-12, 32));
