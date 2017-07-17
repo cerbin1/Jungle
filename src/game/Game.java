@@ -10,19 +10,25 @@ class Game {
     private Boar boar;
     private Tortoise tortoise;
     private Hare hare;
+    private CharactersGenerator charactersGenerator;
+
+    private List<Character> characters = new ArrayList<>(2);
 
     private Moves moves;
 
     Game(int width, int height) {
+        characters.add(player);
+        characters.add(boar);
         moves = new Moves();
-        board = new Board(width, height, this);
+        board = new Board(width, height, characters);
+        charactersGenerator = new CharactersGenerator(board);
         generateCharacters();
         generateNature();
     }
 
     private void generateCharacters() {
-        player = board.generatePlayer();
-        boar = board.generateBoar();
+        player = charactersGenerator.generatePlayer();
+        boar = charactersGenerator.generateBoar();
     }
 
     void displayBoard() {
@@ -77,11 +83,11 @@ class Game {
     private void killBoar(Point point) {
         point.setLocation(boar.getX(), boar.getY());
         System.out.println("Boar has been eaten");
-        boar = board.generateBoar();
+        boar = charactersGenerator.generateBoar();
     }
 
     private void killPlayer(Point point) {
-        player = board.generatePlayer();
+        player = charactersGenerator.generatePlayer();
         player.resetStrength();
         point.setLocation(player.getX(), player.getY());
         System.out.println("Player has been eaten!");
@@ -89,13 +95,13 @@ class Game {
 
     private void killTortoise(Point point) {
         point.setLocation(tortoise.getX(), tortoise.getY());
-        tortoise = board.generateTortoise();
+        tortoise = charactersGenerator.generateTortoise();
         System.out.println("Tortoise has been eaten");
     }
 
     private void killHare(Point point) {
         point.setLocation(hare.getX(), hare.getY());
-        hare = board.generateHare();
+        hare = charactersGenerator.generateHare();
         System.out.println("Hare has been eaten");
     }
 

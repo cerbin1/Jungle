@@ -7,6 +7,16 @@ import java.util.Random;
 import static java.util.Arrays.stream;
 
 public class Board {
+    private List<Character> characters;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     private int width;
     private int height;
     private final char[][] board;
@@ -14,12 +24,10 @@ public class Board {
     private final List<Point> grass;
     private final List<Point> apples;
 
-    private Game game;
-
     private final static Random random = new Random();
 
-    public Board(int width, int height, Game game) {
-        this.game = game;
+    public Board(int width, int height, List<Character> characters) {
+        this.characters = characters;
         this.width = width;
         this.height = height;
         board = new char[width][height];
@@ -42,7 +50,7 @@ public class Board {
 
     public void displayBoard() {
         fillBoardWithSpaces();
-        for (Character character : game.getCharacters()) {
+        for (Character character : characters) {
             board[character.getX()][character.getY()] = character.getCharacter();
         }
 
@@ -70,47 +78,11 @@ public class Board {
                 .count();
     }
 
-    public Player generatePlayer() {
-        while (true) {
-            Point point = getRandomPoint();
-            if (isEmptySpaceOn(point)) {
-                return new Player(point);
-            }
-        }
-    }
-
-    public Boar generateBoar() {
-        while (true) {
-            Point point = getRandomPoint();
-            if (isEmptySpaceOn(point)) {
-                int strength = random.nextInt(3);
-                return new Boar(point, strength);
-            }
-        }
-    }
-
-    public Tortoise generateTortoise() {
-        while (true) {
-            Point point = getRandomPoint();
-            if (isEmptySpaceOn(point)) {
-                int strength = random.nextInt(2);
-                return new Tortoise(point, strength);
-            }
-        }
-    }
-
-    public Hare generateHare() {
-        while (true) {
-            Point point = getRandomPoint();
-            if (isEmptySpaceOn(point)) {
-                int strength = random.nextInt(1);
-                return new Hare(point, strength);
-            }
-        }
-    }
 
     public boolean isEmptySpaceOn(Point point) {
-        return !grass.contains(point) && !apples.contains(point) && game.getCharacters().stream().noneMatch(character -> character.isOnPosition(point));
+        return !grass.contains(point)
+                && !apples.contains(point)
+                && characters.stream().noneMatch(character -> character.isOnPosition(point));
     }
 
     public boolean isAppleOn(Point position) {
