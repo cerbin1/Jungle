@@ -2,6 +2,8 @@ package game;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class BoardTest {
@@ -95,39 +97,42 @@ public class BoardTest {
 
 
     @Test
-    public void shouldCountFreeSpaces() {
+    public void shouldCountAllFreeSpaces() {
         // given
-        Board board = getBoard();
+        Board board = new Board(10, 10, new ArrayList<>());
 
         // when
         int freeSpaces = board.countFreeSpaces();
+
         // then
         assertEquals(100, freeSpaces);
     }
 
     @Test
-    public void shouldReturnTrueIfItIsEmptySpace() {
+    public void shouldCountFreeSpaces() {
         // given
-        Board board = getBoard();
+        Board board = new Board(10, 10, new ArrayList<>());
+        board.generateGrass();
+        board.generateGrass();
+        board.generateGrass();
+
+        // when
+        int freeSpaces = board.countFreeSpaces();
+
+        // then
+        assertEquals(97, freeSpaces);
+
+    }
+
+    @Test
+    public void shouldReturnTrueOnEmptySpace() {
+        // given
+        Board board = new Board(10, 10, new ArrayList<>());
 
         // when
         boolean isEmpty = board.isEmptySpaceOn(new Point(0, 0));
 
         // then
         assertTrue(isEmpty);
-    }
-
-    @Test
-    public void shouldPlaceCharacterOnBoard() {
-        // given
-        Board board = getBoard();
-        Character player = new Player(0, 0);
-
-        // when
-        board.place(player);
-
-        // then
-        assertEquals(99, board.countFreeSpaces());
-        assertFalse(board.isEmptySpaceOn(new Point(0, 0)));
     }
 }

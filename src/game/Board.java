@@ -71,11 +71,7 @@ public class Board {
     }
 
     public int countFreeSpaces() {
-        return (int) stream(board)
-                .map(String::new)
-                .flatMapToInt(String::chars)
-                .filter(i -> i == ' ')
-                .count();
+        return width * height - characters.size() - grass.size() - apples.size();
     }
 
 

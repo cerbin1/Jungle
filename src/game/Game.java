@@ -20,9 +20,9 @@ class Game {
         characters.add(player);
         characters.add(boar);
         moves = new Moves();
-        board = new Board(width, height, characters);
         charactersGenerator = new CharactersGenerator(board);
         generateCharacters();
+        board = new Board(width, height, characters);
         generateNature();
     }
 

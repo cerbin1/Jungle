@@ -31,7 +31,7 @@ public abstract class Character {
     }
 
     public void setPosition(Point position) {
-        if (position.getY() >= 0 && position.getY() >= 0) {
+        if (position.getX() >= 0 && position.getY() >= 0) {
             this.position = position;
         }
     }
