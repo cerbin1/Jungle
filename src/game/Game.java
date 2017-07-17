@@ -33,7 +33,6 @@ class Game {
         Point move = moves.getMove(direction);
         Point newPosition = new Point(move.getX() + player.getX(), move.getY() + player.getY());
         if (board.include(newPosition)) {
-            board.remove(player);
             if (isAppleOn(newPosition)) {
                 giveAppleToPlayer(newPosition);
             }
@@ -58,8 +57,12 @@ class Game {
                     killPlayer(newPosition);
                 }
             }
+
+            if (isGrassOn(newPosition)) {
+                board.removeGrass(newPosition);
+            }
+
             player.setCoordination(newPosition);
-            placeCharacters();
             boarMove();
             generateNature();
         }
@@ -138,35 +141,37 @@ class Game {
 
     public void boarMove() {
         Point move = moves.getRandomMove();
-        Point point = new Point(move.getX() + boar.getX(), move.getY() + boar.getY());
-        if (board.include(point)) {
-            board.remove(boar);
-            if (isGrassOn(point)) {
+        Point newPosition = new Point(move.getX() + boar.getX(), move.getY() + boar.getY());
+        if (board.include(newPosition)) {
+            if (isGrassOn(newPosition)) {
                 boar.incrementStrength();
+                board.removeGrass(newPosition);
             }
-            if (isPlayerOn(point)) {
+            if (isPlayerOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, player)) {
-                    killPlayer(point);
+                    killPlayer(newPosition);
                 } else {
-                    killBoar(point);
+                    killBoar(newPosition);
                 }
             }
-            if (isTortoiseOn(point)) {
+            if (isTortoiseOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, tortoise)) {
-                    killTortoise(point);
+                    killTortoise(newPosition);
                 } else {
-                    killBoar(point);
+                    killBoar(newPosition);
                 }
             }
-            if (isHareOn(point)) {
+            if (isHareOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, hare)) {
-                    killHare(point);
+                    killHare(newPosition);
                 } else {
-                    killBoar(point);
+                    killBoar(newPosition);
                 }
             }
-            boar.setCoordination(point);
-            placeCharacters();
+            if (isAppleOn(newPosition)) {
+                board.removeApple(newPosition);
+            }
+            boar.setCoordination(newPosition);
         }
     }
 
