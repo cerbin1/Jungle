@@ -173,11 +173,4 @@ class Game {
             boar.setPosition(newPosition);
         }
     }
-
-    public List<Character> getCharacters() {
-        List<Character> characters = new ArrayList<>(2);
-        characters.add(player);
-        characters.add(boar);
-        return characters;
-    }
 }

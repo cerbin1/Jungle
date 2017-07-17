@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static java.util.Arrays.stream;
-
 public class Board {
     private List<Character> characters;
 
@@ -33,7 +31,6 @@ public class Board {
         board = new char[width][height];
         grass = new ArrayList<>();
         apples = new ArrayList<>();
-        fillBoardWithSpaces();
     }
 
     private void fillBoardWithSpaces() {
@@ -87,14 +84,6 @@ public class Board {
 
     public boolean isGrassOn(Point position) {
         return grass.contains(position);
-    }
-
-    public void remove(Character character) {
-        board[character.getX()][character.getY()] = ' ';
-    }
-
-    public void place(Character character) {
-        board[character.getX()][character.getY()] = character.getCharacter();
     }
 
     public void generateGrass() {

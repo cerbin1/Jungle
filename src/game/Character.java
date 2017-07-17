@@ -36,10 +36,6 @@ public abstract class Character {
         }
     }
 
-    public boolean standsOn(Point otherPosition) {
-        return position.equals(otherPosition);
-    }
-
     public char getCharacter() {
         return character;
     }
