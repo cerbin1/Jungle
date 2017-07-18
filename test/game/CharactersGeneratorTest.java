@@ -2,15 +2,17 @@ package game;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class CharactersGeneratorTest {
+    private CharactersGenerator getCharactersGenerator() {
+        return new CharactersGenerator(new Board(10, 10, new Game(10, 10)));
+    }
+
     @Test
     public void shouldGeneratePlayer() {
         // given
-        CharactersGenerator generator = new CharactersGenerator(new Board(10, 10, new ArrayList<>()));
+        CharactersGenerator generator = getCharactersGenerator();
 
         // when
         Player player = generator.generatePlayer();
@@ -22,7 +24,7 @@ public class CharactersGeneratorTest {
     @Test
     public void shouldGenerateBoar() {
         // given
-        CharactersGenerator generator = new CharactersGenerator(new Board(10, 10, new ArrayList<>()));
+        CharactersGenerator generator = getCharactersGenerator();
 
         // when
         Boar boar = generator.generateBoar();
@@ -34,7 +36,7 @@ public class CharactersGeneratorTest {
     @Test
     public void shouldGenerateTortoise() {
         // given
-        CharactersGenerator generator = new CharactersGenerator(new Board(10, 10, new ArrayList<>()));
+        CharactersGenerator generator = getCharactersGenerator();
 
         // when
         Tortoise tortoise = generator.generateTortoise();
@@ -46,7 +48,7 @@ public class CharactersGeneratorTest {
     @Test
     public void shouldGenerateHare() {
         // given
-        CharactersGenerator generator = new CharactersGenerator(new Board(10, 10, new ArrayList<>()));
+        CharactersGenerator generator = getCharactersGenerator();
 
         // when
         Hare hare = generator.generateHare();
