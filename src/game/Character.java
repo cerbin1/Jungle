@@ -40,7 +40,7 @@ public abstract class Character {
         return character;
     }
 
-    public boolean isOnPosition(Point position) {
-        return this.position.equals(position);
+    public boolean isOnPosition(Point other) {
+        return this.position.equals(other);
     }
 }

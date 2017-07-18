@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Board {
-    private List<Character> characters;
+    private Game game;
 
     public int getWidth() {
         return width;
@@ -24,8 +24,8 @@ public class Board {
 
     private final static Random random = new Random();
 
-    public Board(int width, int height, List<Character> characters) {
-        this.characters = characters;
+    public Board(int width, int height, Game game) {
+        this.game = game;
         this.width = width;
         this.height = height;
         board = new char[width][height];
@@ -47,7 +47,7 @@ public class Board {
 
     public void displayBoard() {
         fillBoardWithSpaces();
-        for (Character character : characters) {
+        for (Character character : game.getCharacters()) {
             board[character.getX()][character.getY()] = character.getCharacter();
         }
 
@@ -68,14 +68,14 @@ public class Board {
     }
 
     public int countFreeSpaces() {
-        return width * height - characters.size() - grass.size() - apples.size();
+        return width * height - game.getCharacters().size() - grass.size() - apples.size();
     }
 
 
     public boolean isEmptySpaceOn(Point point) {
         return !grass.contains(point)
                 && !apples.contains(point)
-                && characters.stream().noneMatch(character -> character.isOnPosition(point));
+                && game.getCharacters().stream().noneMatch(character -> character != null && character.isOnPosition(point));
     }
 
     public boolean isAppleOn(Point position) {
@@ -115,6 +115,6 @@ public class Board {
     }
 
     public void removeGrass(Point grassPosition) {
-        apples.remove(grassPosition);
+        grass.remove(grassPosition);
     }
 }
