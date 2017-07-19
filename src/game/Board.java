@@ -33,10 +33,10 @@ public class Board {
         apples = new ArrayList<>();
     }
 
-    private void fillBoardWithSpaces() {
+    private void fillBoardWithDots() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                board[j][i] = ' ';
+                board[j][i] = '.';
             }
         }
     }
@@ -46,7 +46,7 @@ public class Board {
     }
 
     public void displayBoard() {
-        fillBoardWithSpaces();
+        fillBoardWithDots();
         for (Character character : game.getCharacters()) {
             board[character.getX()][character.getY()] = character.getCharacter();
         }
