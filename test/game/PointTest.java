@@ -19,20 +19,6 @@ public class PointTest {
     }
 
     @Test
-    public void shouldSetPointLocation() {
-        // given
-        Point point = new Point(10, 20);
-        Point newPoint = new Point(point.getX(), point.getY());
-
-        // when
-        newPoint.setLocation(5, 10);
-
-        // then
-        assertEquals(new Point(10, 20), point);
-        assertEquals(new Point(5, 10), newPoint);
-    }
-
-    @Test
     public void shouldAddPoint() {
         // given
         Point point = new Point(4, 5);

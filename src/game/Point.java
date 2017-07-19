@@ -16,11 +16,6 @@ public class Point {
         return y;
     }
 
-    public void setLocation(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
     public Point add(Point point) {
         return new Point(x + point.getX(), y + point.getY());
     }
