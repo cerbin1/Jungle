@@ -44,25 +44,21 @@ class Game {
             }
             if (isBoarOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, boar)) {
-                    System.out.println("Boar has been eaten");
-                    boar = charactersGenerator.generateBoar();
+                    killBoar();
                 } else {
-                    System.out.println("Player has been eaten");
-                    player = charactersGenerator.generatePlayer();
-                    player.resetStrength();
-                    newPosition.setLocation(player.getX(), player.getY());
+                    killPlayer(newPosition);
                 }
             }
             if (isTortoiseOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, tortoise)) {
-                    killTortoise(newPosition);
+                    killTortoise();
                 } else {
                     killPlayer(newPosition);
                 }
             }
             if (isHareOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(player, hare)) {
-                    killHare(newPosition);
+                    killHare();
                 } else {
                     killPlayer(newPosition);
                 }
@@ -72,38 +68,35 @@ class Game {
                 board.removeGrass(newPosition);
             }
             player.setPosition(newPosition);
-            //boarMove();
+            boarMove();
             generateNature();
         }
         System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
     }
 
-    private void giveAppleToPlayer(Point applePosition) {
-        player.incrementStrength();
-        board.removeApple(applePosition);
-    }
-
-    private void killBoar(Point point) {
-        point.setLocation(player.getX(), player.getY());
+    private void killBoar() {
         System.out.println("Boar has been eaten");
         boar = charactersGenerator.generateBoar();
     }
 
+    private void killBoar(Point point) {
+        point.setLocation(player.getX(), player.getY());
+        killBoar();
+    }
+
     private void killPlayer(Point point) {
+        System.out.println("Player has been eaten!");
         player = charactersGenerator.generatePlayer();
         player.resetStrength();
         point.setLocation(player.getX(), player.getY());
-        System.out.println("Player has been eaten!");
     }
 
-    private void killTortoise(Point point) {
-        point.setLocation(tortoise.getX(), tortoise.getY());
+    private void killTortoise() {
         tortoise = charactersGenerator.generateTortoise();
         System.out.println("Tortoise has been eaten");
     }
 
-    private void killHare(Point point) {
-        point.setLocation(hare.getX(), hare.getY());
+    private void killHare() {
         hare = charactersGenerator.generateHare();
         System.out.println("Hare has been eaten");
     }
@@ -158,14 +151,14 @@ class Game {
             }
             if (isTortoiseOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, tortoise)) {
-                    killTortoise(newPosition);
+                    killTortoise();
                 } else {
                     killBoar(newPosition);
                 }
             }
             if (isHareOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, hare)) {
-                    killHare(newPosition);
+                    killHare();
                 } else {
                     killBoar(newPosition);
                 }
@@ -181,6 +174,8 @@ class Game {
         List<Character> characters = new ArrayList<>(2);
         characters.add(player);
         characters.add(boar);
+        characters.add(tortoise);
+        characters.add(hare);
         return characters;
     }
 }

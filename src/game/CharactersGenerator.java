@@ -33,7 +33,7 @@ public class CharactersGenerator {
     public Tortoise generateTortoise() {
         while (true) {
             Point point = getRandomPoint();
-            if (board.isEmptySpaceOn(point)) {
+            if (board.isAbleToPlaceCharacterOn(point)) {
                 int strength = random.nextInt(2);
                 return new Tortoise(point, strength);
             }
@@ -43,7 +43,7 @@ public class CharactersGenerator {
     public Hare generateHare() {
         while (true) {
             Point point = getRandomPoint();
-            if (board.isEmptySpaceOn(point)) {
+            if (board.isAbleToPlaceCharacterOn(point)) {
                 int strength = random.nextInt(1);
                 return new Hare(point, strength);
             }
