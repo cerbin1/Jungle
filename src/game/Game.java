@@ -35,8 +35,7 @@ class Game {
     }
 
     void makeMove(char direction) {
-        Point move = movesHelper.getMove(direction);
-        Point newPosition = move.add(player.getPoint());
+        Point newPosition = movesHelper.getMove(direction).add(player.getPoint());
         if (board.include(newPosition)) {
             if (isAppleOn(newPosition)) {
                 player.incrementStrength();
@@ -151,8 +150,7 @@ class Game {
     }
 
     public void boarMove() {
-        Point move = movesHelper.getRandomMove();
-        Point newPosition = move.add(boar.getPoint());
+        Point newPosition = movesHelper.getRandomMove().add(boar.getPoint());
         if (board.include(newPosition)) {
             if (isGrassOn(newPosition)) {
                 boar.incrementStrength();
@@ -187,8 +185,7 @@ class Game {
     }
 
     public void tortoiseMove() {
-        Point move = movesHelper.getRandomMove();
-        Point newPosition = move.add(tortoise.getPoint());
+        Point newPosition = movesHelper.getRandomMove().add(tortoise.getPoint());
         if (board.include(newPosition)) {
             if (isGrassOn(newPosition)) {
                 tortoise.incrementStrength();
@@ -223,8 +220,7 @@ class Game {
     }
 
     public void hareMove() {
-        Point move = movesHelper.getRandomMove();
-        Point newPosition = move.add(hare.getPoint());
+        Point newPosition = movesHelper.getRandomMove().add(hare.getPoint());
         if (board.include(newPosition)) {
             if (isGrassOn(newPosition)) {
                 hare.incrementStrength();
