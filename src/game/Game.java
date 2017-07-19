@@ -50,6 +50,7 @@ class Game {
                     System.out.println("Boar has been eaten");
                     boar = charactersGenerator.generateBoar();
                 } else {
+                    System.out.println("Player has been eaten");
                     player = charactersGenerator.generatePlayer();
                     player.resetStrength();
                     newPosition.setLocation(player.getX(), player.getY());
