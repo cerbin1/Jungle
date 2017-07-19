@@ -69,9 +69,27 @@ class Game {
             }
             player.setPosition(newPosition);
             boarMove();
+            tortoiseMove();
+            hareMove();
             generateNature();
         }
         System.out.println(player.getX() + ", " + player.getY() + ", strength: " + player.getStrength());
+    }
+
+    private void killPlayer(Point point) {
+        killPlayer();
+        point.setLocation(player.getX(), player.getY());
+    }
+
+    private void killPlayer() {
+        System.out.println("Player has been eaten!");
+        player = charactersGenerator.generatePlayer();
+        player.resetStrength();
+    }
+
+    private void killBoar(Point point) {
+        point.setLocation(boar.getX(), boar.getY());
+        killBoar();
     }
 
     private void killBoar() {
@@ -79,21 +97,19 @@ class Game {
         boar = charactersGenerator.generateBoar();
     }
 
-    private void killBoar(Point point) {
-        point.setLocation(player.getX(), player.getY());
-        killBoar();
-    }
-
-    private void killPlayer(Point point) {
-        System.out.println("Player has been eaten!");
-        player = charactersGenerator.generatePlayer();
-        player.resetStrength();
-        point.setLocation(player.getX(), player.getY());
+    private void killTortoise(Point point) {
+        killTortoise();
+        point.setLocation(tortoise.getX(), tortoise.getY());
     }
 
     private void killTortoise() {
         tortoise = charactersGenerator.generateTortoise();
         System.out.println("Tortoise has been eaten");
+    }
+
+    private void killHare(Point point) {
+        killHare();
+        point.setLocation(tortoise.getX(), tortoise.getY());
     }
 
     private void killHare() {
@@ -136,7 +152,7 @@ class Game {
 
     public void boarMove() {
         Point move = movesHelper.getRandomMove();
-        Point newPosition = new Point(move.getX() + boar.getX(), move.getY() + boar.getY());
+        Point newPosition = move.add(boar.getPoint());
         if (board.include(newPosition)) {
             if (isGrassOn(newPosition)) {
                 boar.incrementStrength();
@@ -144,7 +160,7 @@ class Game {
             }
             if (isPlayerOn(newPosition)) {
                 if (firstCharacterHasGreaterStrengthThanSecond(boar, player)) {
-                    killPlayer(newPosition);
+                    killPlayer();
                 } else {
                     killBoar(newPosition);
                 }
@@ -170,8 +186,81 @@ class Game {
         }
     }
 
+    public void tortoiseMove() {
+        Point move = movesHelper.getRandomMove();
+        Point newPosition = move.add(tortoise.getPoint());
+        if (board.include(newPosition)) {
+            if (isGrassOn(newPosition)) {
+                tortoise.incrementStrength();
+                board.removeGrass(newPosition);
+            }
+            if (isPlayerOn(newPosition)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(tortoise, player)) {
+                    killPlayer();
+                } else {
+                    killTortoise(newPosition);
+                }
+            }
+            if (isBoarOn(newPosition)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(tortoise, boar)) {
+                    killBoar();
+                } else {
+                    killTortoise(newPosition);
+                }
+            }
+            if (isHareOn(newPosition)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(tortoise, hare)) {
+                    killHare();
+                } else {
+                    killTortoise(newPosition);
+                }
+            }
+            if (isAppleOn(newPosition)) {
+                board.removeApple(newPosition);
+            }
+            tortoise.setPosition(newPosition);
+        }
+    }
+
+    public void hareMove() {
+        Point move = movesHelper.getRandomMove();
+        Point newPosition = move.add(hare.getPoint());
+        if (board.include(newPosition)) {
+            if (isGrassOn(newPosition)) {
+                hare.incrementStrength();
+                board.removeGrass(newPosition);
+            }
+            if (isPlayerOn(newPosition)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(hare, player)) {
+                    killPlayer();
+                } else {
+                    killHare(newPosition);
+                }
+            }
+            if (isBoarOn(newPosition)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(hare, boar)) {
+                    killBoar();
+                } else {
+                    killHare(newPosition);
+                }
+            }
+            if (isTortoiseOn(newPosition)) {
+                if (firstCharacterHasGreaterStrengthThanSecond(hare, tortoise)) {
+                    killTortoise();
+                } else {
+                    killHare(newPosition);
+                }
+            }
+            if (isAppleOn(newPosition)) {
+                board.removeApple(newPosition);
+            }
+            boar.setPosition(newPosition);
+        }
+    }
+
+
     public List<Character> getCharacters() {
-        List<Character> characters = new ArrayList<>(2);
+        List<Character> characters = new ArrayList<>(4);
         characters.add(player);
         characters.add(boar);
         characters.add(tortoise);

@@ -103,7 +103,7 @@ public class BoardTest {
         int freeSpaces = board.countFreeSpaces();
 
         // then
-        assertEquals(98, freeSpaces);
+        assertEquals(96, freeSpaces);
     }
 
     @Test
@@ -118,7 +118,7 @@ public class BoardTest {
         int freeSpaces = board.countFreeSpaces();
 
         // then
-        assertEquals(95, freeSpaces);
+        assertEquals(93, freeSpaces);
     }
 
     @Test
