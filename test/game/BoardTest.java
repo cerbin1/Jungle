@@ -119,7 +119,6 @@ public class BoardTest {
 
         // then
         assertEquals(95, freeSpaces);
-
     }
 
     @Test
