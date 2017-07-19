@@ -43,4 +43,8 @@ public abstract class Character {
     public boolean isOnPosition(Point other) {
         return this.position.equals(other);
     }
+
+    public Point getPoint() {
+        return position;
+    }
 }

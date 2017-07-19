@@ -4,20 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Game {
+    private MovesHelper movesHelper;
+
     private Board board;
 
     private Player player;
     private Boar boar;
     private Tortoise tortoise;
     private Hare hare;
+
     private CharactersGenerator charactersGenerator;
 
-    private List<Character> characters = new ArrayList<>(2);
-
-    private Moves moves;
-
     Game(int width, int height) {
-        moves = new Moves();
+        movesHelper = new MovesHelper();
         board = new Board(width, height, this);
         charactersGenerator = new CharactersGenerator(board);
         generateCharacters();
@@ -29,8 +28,6 @@ class Game {
         boar = charactersGenerator.generateBoar();
         tortoise = charactersGenerator.generateTortoise();
         hare = charactersGenerator.generateHare();
-        characters.add(player);
-        characters.add(boar);
     }
 
     void displayBoard() {
@@ -38,8 +35,8 @@ class Game {
     }
 
     void makeMove(char direction) {
-        Point move = moves.getMove(direction);
-        Point newPosition = new Point(move.getX() + player.getX(), move.getY() + player.getY());
+        Point move = movesHelper.getMove(direction);
+        Point newPosition = move.add(player.getPoint());
         if (board.include(newPosition)) {
             if (isAppleOn(newPosition)) {
                 player.incrementStrength();
@@ -145,7 +142,7 @@ class Game {
     }
 
     public void boarMove() {
-        Point move = moves.getRandomMove();
+        Point move = movesHelper.getRandomMove();
         Point newPosition = new Point(move.getX() + boar.getX(), move.getY() + boar.getY());
         if (board.include(newPosition)) {
             if (isGrassOn(newPosition)) {

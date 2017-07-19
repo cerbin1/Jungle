@@ -21,6 +21,10 @@ public class Point {
         this.y = y;
     }
 
+    public Point add(Point point) {
+        return new Point(x + point.getX(), y + point.getY());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == null) return false;
