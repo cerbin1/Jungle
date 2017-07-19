@@ -23,7 +23,7 @@ public class CharactersGenerator {
     public Boar generateBoar() {
         while (true) {
             Point point = getRandomPoint();
-            if (board.isEmptySpaceOn(point)) {
+            if (board.isAbleToPlaceCharacterOn(point)) {
                 int strength = random.nextInt(3);
                 return new Boar(point, strength);
             }

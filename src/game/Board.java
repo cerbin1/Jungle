@@ -117,4 +117,19 @@ public class Board {
     public void removeGrass(Point grassPosition) {
         grass.remove(grassPosition);
     }
+
+    public boolean isAbleToPlaceCharacterOn(Point point) {
+        if (isEmptySpaceOn(point)) {
+            return true;
+        }
+        if (isGrassOn(point)) {
+            removeGrass(point);
+            return true;
+        }
+        if (isAppleOn(point)) {
+            removeApple(point);
+            return true;
+        }
+        return false;
+    }
 }
