@@ -7,7 +7,7 @@ public class Application {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        Game game = new Game(4, 8);
+        Game game = new Game(40, 20);
         game.displayBoard();
         displayHint();
         while (true) {
