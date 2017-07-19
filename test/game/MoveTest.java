@@ -12,7 +12,7 @@ public class MoveTest {
         Move move = new Move();
 
         // when
-        Point point = move.getMove('w');
+        Point point = move.fromChar('w');
 
         // then
         assertEquals(new Point(0, -1), point);
@@ -24,7 +24,7 @@ public class MoveTest {
         Move move = new Move();
 
         // when
-        Point point = move.getMove('s');
+        Point point = move.fromChar('s');
 
         // then
         assertEquals(new Point(0, 1), point);
@@ -36,7 +36,7 @@ public class MoveTest {
         Move move = new Move();
 
         // when
-        Point point = move.getMove('d');
+        Point point = move.fromChar('d');
 
         // then
         assertEquals(new Point(1, 0), point);
@@ -48,7 +48,7 @@ public class MoveTest {
         Move move = new Move();
 
         // when
-        Point point = move.getMove('a');
+        Point point = move.fromChar('a');
 
         // then
         assertEquals(new Point(-1, 0), point);
@@ -60,7 +60,7 @@ public class MoveTest {
         Move move = new Move();
 
         // when
-        Point point = move.getMove(' ');
+        Point point = move.fromChar(' ');
 
         // then
         assertEquals(new Point(0, 0), point);
