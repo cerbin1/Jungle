@@ -132,4 +132,16 @@ public class BoardTest {
         // then
         assertTrue(isEmpty);
     }
+
+    @Test
+    public void shouldReturnTrueIfIsAbleToPlaceCharacter() {
+        // given
+        Board board = new Board(10, 10, new Game(10, 10));
+
+        // when
+        boolean canPlaceCharacter = board.isAbleToPlaceCharacterOn(new Point(0, 0));
+
+        // then
+        assertTrue(canPlaceCharacter);
+    }
 }

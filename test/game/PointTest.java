@@ -43,4 +43,16 @@ public class PointTest {
         // then
         assertTrue(addedPoint.equals(new Point(10, 10)));
     }
+
+    @Test
+    public void shouldGetPointToString() {
+        // given
+        Point point = new Point(13, 21);
+
+        // when
+        String pointToString = point.toString();
+
+        // then
+        assertEquals("Point{x=13, y=21}", pointToString);
+    }
 }
