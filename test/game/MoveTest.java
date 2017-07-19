@@ -4,15 +4,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class MovesHelperTest {
+public class MoveTest {
 
     @Test
     public void shouldGetUpMoveOnUpDirection() {
         // given
-        MovesHelper movesHelper = new MovesHelper();
+        Move move = new Move();
 
         // when
-        Point point = movesHelper.getMove('w');
+        Point point = move.getMove('w');
 
         // then
         assertEquals(new Point(0, -1), point);
@@ -21,10 +21,10 @@ public class MovesHelperTest {
     @Test
     public void shouldGetDownMoveOnUpDirection() {
         // given
-        MovesHelper movesHelper = new MovesHelper();
+        Move move = new Move();
 
         // when
-        Point point = movesHelper.getMove('s');
+        Point point = move.getMove('s');
 
         // then
         assertEquals(new Point(0, 1), point);
@@ -33,10 +33,10 @@ public class MovesHelperTest {
     @Test
     public void shouldGetRightMoveOnUpDirection() {
         // given
-        MovesHelper movesHelper = new MovesHelper();
+        Move move = new Move();
 
         // when
-        Point point = movesHelper.getMove('d');
+        Point point = move.getMove('d');
 
         // then
         assertEquals(new Point(1, 0), point);
@@ -45,10 +45,10 @@ public class MovesHelperTest {
     @Test
     public void shouldGetLeftMoveOnUpDirection() {
         // given
-        MovesHelper movesHelper = new MovesHelper();
+        Move move = new Move();
 
         // when
-        Point point = movesHelper.getMove('a');
+        Point point = move.getMove('a');
 
         // then
         assertEquals(new Point(-1, 0), point);
@@ -57,10 +57,10 @@ public class MovesHelperTest {
     @Test
     public void shouldNotGetMove() {
         // given
-        MovesHelper movesHelper = new MovesHelper();
+        Move move = new Move();
 
         // when
-        Point point = movesHelper.getMove(' ');
+        Point point = move.getMove(' ');
 
         // then
         assertEquals(new Point(0, 0), point);
