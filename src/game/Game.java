@@ -87,8 +87,8 @@ class Game {
     }
 
     private void killBoar(Point point) {
-        point.setLocation(boar.getX(), boar.getY());
         killBoar();
+        point.setLocation(boar.getX(), boar.getY());
     }
 
     private void killBoar() {
