@@ -87,23 +87,35 @@ public class Board {
     }
 
     public void generateGrass() {
-        generateNature(grass);
-    }
-
-    public void generateApple() {
-        generateNature(apples);
-    }
-
-    private void generateNature(List<Point> list) {
         if (countFreeSpaces() != 0) {
             while (true) {
                 Point point = getRandomPoint();
                 if (isEmptySpaceOn(point)) {
-                    list.add(point);
+                    addGrassOn(point);
                     break;
                 }
             }
         }
+    }
+
+    private void addGrassOn(Point point) {
+        grass.add(point);
+    }
+
+    public void generateApple() {
+        if (countFreeSpaces() != 0) {
+            while (true) {
+                Point point = getRandomPoint();
+                if (isEmptySpaceOn(point)) {
+                    addAppleOn(point);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void addAppleOn(Point point) {
+        apples.add(point);
     }
 
     private Point getRandomPoint() {
