@@ -1,5 +1,7 @@
 package game;
 
+import game.factory.CharacterFactory;
+
 public abstract class Character {
     private int strength = 0;
     private Point position;
@@ -9,6 +11,8 @@ public abstract class Character {
         this.position = position;
         this.character = character;
     }
+
+    public abstract CharacterFactory getFactory();
 
     public void setStrength(int strength) {
         this.strength = strength;

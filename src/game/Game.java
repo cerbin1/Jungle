@@ -1,5 +1,7 @@
 package game;
 
+import game.factory.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +26,10 @@ class Game {
     }
 
     private void generateCharacters() {
-        player = charactersGenerator.generatePlayer();
-        boar = charactersGenerator.generateBoar();
-        tortoise = charactersGenerator.generateTortoise();
-        hare = charactersGenerator.generateHare();
+        player = (Player) charactersGenerator.generate(new PlayerFactory());
+        boar = (Boar) charactersGenerator.generate(new BoarFactory());
+        tortoise = (Tortoise) charactersGenerator.generate(new TortoiseFactory());
+        hare = (Hare) charactersGenerator.generate(new HareFactory());
     }
 
     void displayBoard() { // TODO przyjmuj stream na jakiego ma wyswietlac
@@ -80,22 +82,22 @@ class Game {
 
     private void killPlayer() {
         System.out.println("Player has been eaten!");
-        player = charactersGenerator.generatePlayer();
+        player = (Player) charactersGenerator.generate(new PlayerFactory());
         player.resetStrength();
     }
 
     private void killBoar() {
+        boar = (Boar) charactersGenerator.generate(new BoarFactory());
         System.out.println("Boar has been eaten");
-        boar = charactersGenerator.generateBoar();
     }
 
     private void killTortoise() {
-        tortoise = charactersGenerator.generateTortoise();
+        tortoise = (Tortoise) charactersGenerator.generate(new TortoiseFactory());
         System.out.println("Tortoise has been eaten");
     }
 
     private void killHare() {
-        hare = charactersGenerator.generateHare();
+        hare = (Hare) charactersGenerator.generate(new HareFactory());
         System.out.println("Hare has been eaten");
     }
 

@@ -1,5 +1,7 @@
 package game;
 
+import game.factory.CharacterFactory;
+
 import java.util.Random;
 
 public class CharactersGenerator {
@@ -11,41 +13,11 @@ public class CharactersGenerator {
         this.board = board;
     }
 
-    public Player generatePlayer() {
+    public Character generate(CharacterFactory characterFactory) {
         while (true) { // TODO losowanie punktu aż trafisz na pusty jest średnie. Lepiej wyciągnąć streamem wszystkie wolne, i z tych wolnych raz zrobić randoma.
             Point point = getRandomPoint();
-            if (board.isEmptySpaceOn(point)) {
-                return new Player(point);
-            }
-        }
-    }
-
-    public Boar generateBoar() {
-        while (true) {
-            Point point = getRandomPoint();
             if (board.isAbleToPlaceCharacterOn(point)) {
-                int strength = random.nextInt(3);
-                return new Boar(point, strength);
-            }
-        }
-    }
-
-    public Tortoise generateTortoise() {
-        while (true) {
-            Point point = getRandomPoint();
-            if (board.isAbleToPlaceCharacterOn(point)) {
-                int strength = random.nextInt(2);
-                return new Tortoise(point, strength);
-            }
-        }
-    }
-
-    public Hare generateHare() {
-        while (true) {
-            Point point = getRandomPoint();
-            if (board.isAbleToPlaceCharacterOn(point)) {
-                int strength = random.nextInt(1);
-                return new Hare(point, strength);
+                return characterFactory.create(point, characterFactory.getRandomStrength());
             }
         }
     }

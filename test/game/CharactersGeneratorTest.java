@@ -1,5 +1,6 @@
 package game;
 
+import game.factory.PlayerFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -10,51 +11,14 @@ public class CharactersGeneratorTest {
     }
 
     @Test
-    public void shouldGeneratePlayer() {
+    public void shouldGenerate() {
         // given
         CharactersGenerator generator = getCharactersGenerator();
 
         // when
-        Player player = generator.generatePlayer();
+        Character character = generator.generate(new PlayerFactory());
 
         // then
-        assertTrue(player != null);
+        assertTrue(character != null);
     }
-
-    @Test
-    public void shouldGenerateBoar() {
-        // given
-        CharactersGenerator generator = getCharactersGenerator();
-
-        // when
-        Boar boar = generator.generateBoar();
-
-        // then
-        assertTrue(boar != null);
-    }
-
-    @Test
-    public void shouldGenerateTortoise() {
-        // given
-        CharactersGenerator generator = getCharactersGenerator();
-
-        // when
-        Tortoise tortoise = generator.generateTortoise();
-
-        // then
-        assertTrue(tortoise != null);
-    }
-
-    @Test
-    public void shouldGenerateHare() {
-        // given
-        CharactersGenerator generator = getCharactersGenerator();
-
-        // when
-        Hare hare = generator.generateHare();
-
-        // then
-        assertTrue(hare != null);
-    }
-
 }
