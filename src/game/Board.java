@@ -15,7 +15,7 @@ public class Board {
         return height;
     }
 
-    private int width;
+    private int width; // TODO widget i height może być final
     private int height;
     private final char[][] board;
 
@@ -29,7 +29,7 @@ public class Board {
         this.width = width;
         this.height = height;
         board = new char[width][height];
-        grass = new ArrayList<>();
+        grass = new ArrayList<>(); // TODO zainicjalizuj od razu przy polu
         apples = new ArrayList<>();
     }
 
@@ -73,7 +73,7 @@ public class Board {
 
 
     public boolean isEmptySpaceOn(Point point) {
-        return !grass.contains(point)
+        return !grass.contains(point) // TODO porozdzielaj to na 3 ify
                 && !apples.contains(point)
                 && game.getCharacters().stream().noneMatch(character -> character != null && character.isOnPosition(point));
     }
@@ -87,7 +87,7 @@ public class Board {
     }
 
     public void generateGrass() {
-        if (countFreeSpaces() != 0) {
+        if (countFreeSpaces() != 0) { // TODO rozdziel to na ifa z pozytywnym warunkeim i returna, a potem while
             while (true) {
                 Point point = getRandomPoint();
                 if (isEmptySpaceOn(point)) {
@@ -131,7 +131,7 @@ public class Board {
     }
 
     public boolean isAbleToPlaceCharacterOn(Point point) {
-        if (isEmptySpaceOn(point)) {
+        if (isEmptySpaceOn(point)) { // TODO bardzo ładnie
             return true;
         }
         if (isGrassOn(point)) {

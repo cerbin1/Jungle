@@ -12,7 +12,7 @@ public class CharactersGenerator {
     }
 
     public Player generatePlayer() {
-        while (true) {
+        while (true) { // TODO losowanie punktu aż trafisz na pusty jest średnie. Lepiej wyciągnąć streamem wszystkie wolne, i z tych wolnych raz zrobić randoma.
             Point point = getRandomPoint();
             if (board.isEmptySpaceOn(point)) {
                 return new Player(point);

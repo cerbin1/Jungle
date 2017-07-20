@@ -30,7 +30,7 @@ class Game {
         hare = charactersGenerator.generateHare();
     }
 
-    void displayBoard() {
+    void displayBoard() { // TODO przyjmuj stream na jakiego ma wyswietlac
         board.displayBoard();
     }
 

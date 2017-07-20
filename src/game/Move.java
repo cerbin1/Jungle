@@ -2,9 +2,10 @@ package game;
 
 import java.util.Random;
 
-public class Move {
-    private final Point[] points = {new Point(0, -1), new Point(0, 1), new Point(-1, 0), new Point(1, 0)};
+public class Move { // TODO przerobic na enuma
     private static final Random random = new Random();
+
+    private final Point[] points = {new Point(0, -1), new Point(0, 1), new Point(-1, 0), new Point(1, 0)};
 
     public Point getRandom() {
         return points[random.nextInt(3)];
