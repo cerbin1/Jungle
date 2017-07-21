@@ -147,13 +147,26 @@ public class Board {
             return true;
         }
         if (isGrassOn(point)) {
-            removeGrass(point);
             return true;
         }
         if (isAppleOn(point)) {
-            removeApple(point);
             return true;
         }
         return false;
+    }
+
+    public List<Point> getAvailablePoints() {
+        List<Point> pointsAvailableToPlaceCharacter = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                Point point = new Point(i, j);
+                if (isEmptySpaceOn(point) || isGrassOn(point) || isAppleOn(point)) {
+                    removeApple(point);
+                    removeGrass(point);
+                    pointsAvailableToPlaceCharacter.add(new Point(i, j));
+                }
+            }
+        }
+        return pointsAvailableToPlaceCharacter;
     }
 }
