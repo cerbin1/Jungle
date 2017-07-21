@@ -71,9 +71,20 @@ public class Board {
 
 
     public boolean isEmptySpaceOn(Point point) {
-        return !grass.contains(point) // TODO porozdzielaj to na 3 ify
-                && !apples.contains(point)
-                && game.getCharacters().stream().noneMatch(character -> character != null && character.isOnPosition(point));
+        if (grass.contains(point)) {
+            return false;
+        }
+        if (apples.contains(point)) {
+            return false;
+        }
+
+        if (game.getCharacters()
+                .stream()
+                .anyMatch(character -> character != null
+                        && character.isOnPosition(point))) {
+            return false;
+        }
+        return true;
     }
 
     public boolean isAppleOn(Point position) {
@@ -85,13 +96,14 @@ public class Board {
     }
 
     public void generateGrass() {
-        if (countFreeSpaces() != 0) { // TODO rozdziel to na ifa z pozytywnym warunkeim i returna, a potem while
-            while (true) {
-                Point point = getRandomPoint();
-                if (isEmptySpaceOn(point)) {
-                    addGrassOn(point);
-                    break;
-                }
+        if (countFreeSpaces() == 0) {
+            return;
+        }
+        while (true) {
+            Point point = getRandomPoint();
+            if (isEmptySpaceOn(point)) {
+                addGrassOn(point);
+                break;
             }
         }
     }
