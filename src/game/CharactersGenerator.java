@@ -15,14 +15,14 @@ public class CharactersGenerator {
 
     public Character generate(CharacterFactory characterFactory) {
         while (true) { // TODO losowanie punktu aż trafisz na pusty jest średnie. Lepiej wyciągnąć streamem wszystkie wolne, i z tych wolnych raz zrobić randoma.
-            Point point = getRandomPoint();
+            Point point = getRandom();
             if (board.isAbleToPlaceCharacterOn(point)) {
                 return characterFactory.create(point, characterFactory.getRandomStrength());
             }
         }
     }
 
-    private Point getRandomPoint() {
+    private Point getRandom() {
         return new Point(random.nextInt(board.getWidth()), random.nextInt(board.getHeight()));
     }
 }

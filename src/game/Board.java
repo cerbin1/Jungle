@@ -100,7 +100,7 @@ public class Board {
             return;
         }
         while (true) {
-            Point point = getRandomPoint();
+            Point point = getRandom();
             if (isEmptySpaceOn(point)) {
                 addGrassOn(point);
                 break;
@@ -113,22 +113,24 @@ public class Board {
     }
 
     public void generateApple() {
-        if (countFreeSpaces() != 0) {
-            while (true) {
-                Point point = getRandomPoint();
-                if (isEmptySpaceOn(point)) {
-                    addAppleOn(point);
-                    break;
-                }
+        if (countFreeSpaces() == 0) {
+            return;
+        }
+        while (true) {
+            Point point = getRandom();
+            if (isEmptySpaceOn(point)) {
+                addAppleOn(point);
+                break;
             }
         }
+
     }
 
     private void addAppleOn(Point point) {
         apples.add(point);
     }
 
-    private Point getRandomPoint() {
+    private Point getRandom() {
         return new Point(random.nextInt(width), random.nextInt(height));
     }
 
@@ -141,7 +143,7 @@ public class Board {
     }
 
     public boolean isAbleToPlaceCharacterOn(Point point) {
-        if (isEmptySpaceOn(point)) { // TODO bardzo ładnie
+        if (isEmptySpaceOn(point)) {
             return true;
         }
         if (isGrassOn(point)) {

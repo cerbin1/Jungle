@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Game {
-    private Move move;
+    private Move move = new Move();
 
     private Board board;
 
@@ -18,7 +18,6 @@ class Game {
     private CharactersGenerator charactersGenerator;
 
     Game(int width, int height) {
-        move = new Move();
         board = new Board(width, height, this);
         charactersGenerator = new CharactersGenerator(board);
         generateCharacters();
