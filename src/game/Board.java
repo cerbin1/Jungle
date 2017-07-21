@@ -15,12 +15,12 @@ public class Board {
         return height;
     }
 
-    private int width; // TODO widget i height może być final
-    private int height;
+    private final int width;
+    private final int height;
     private final char[][] board;
 
-    private final List<Point> grass;
-    private final List<Point> apples;
+    private final List<Point> grass = new ArrayList<>();
+    private final List<Point> apples = new ArrayList<>();
 
     private final static Random random = new Random();
 
@@ -29,8 +29,6 @@ public class Board {
         this.width = width;
         this.height = height;
         board = new char[width][height];
-        grass = new ArrayList<>(); // TODO zainicjalizuj od razu przy polu
-        apples = new ArrayList<>();
     }
 
     private void fillBoardWithDots() {
